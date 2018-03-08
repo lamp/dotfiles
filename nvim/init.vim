@@ -4,7 +4,10 @@ Plug 'tpope/vim-sensible'
 
 Plug 'tpope/vim-eunuch'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'roxma/nvim-completion-manager'
+Plug 'clojure-vim/async-clj-omni'
 
 Plug 'cocopon/iceberg.vim'
 
@@ -55,7 +58,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } "{{{
 	let NERDTreeWinPos="left"
 	let NERDTreeWinSize=30
 	let NERDTreeDirArrows=1
-	let NERDTreeHijackNetrw = 1	
+	let NERDTreeHijackNetrw = 1
 "}}}
 
 Plug 'tpope/vim-fugitive'
@@ -77,7 +80,7 @@ Plug 'matze/vim-move', "{{{
 "}}}
 
 Plug 'tpope/vim-fireplace'
-Plug 'snoe/nvim-parinfer.js'
+Plug 'bhurlow/vim-parinfer'
 
 Plug 'bronson/vim-trailing-whitespace'
 
@@ -137,9 +140,9 @@ augroup AuNERDTreeCmd
 	endfunction
 
 " autocmd vimenter * NERDTree
-" autocmd VimEnter * if !argc() | NERDTree | endif 
+" autocmd VimEnter * if !argc() | NERDTree | endif
 " autocmd BufEnter * if !argc() | NERDTreeMirror | endif
-" let g:NERDTreeHijackNetrw = 1	
+" let g:NERDTreeHijackNetrw = 1
 
 set number
 set nowrap
