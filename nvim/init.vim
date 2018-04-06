@@ -62,17 +62,14 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } "{{{
 "}}}
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+" Plug 'airblade/vim-gitgutter'
 
-Plug 'mhinz/vim-startify'
-
-Plug 'Raimondi/delimitMate'
-
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-Plug 'airblade/vim-gitgutter'
 Plug 'ddollar/nerdcommenter'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'matze/vim-move', "{{{
@@ -80,7 +77,12 @@ Plug 'matze/vim-move', "{{{
 "}}}
 
 Plug 'tpope/vim-fireplace'
-Plug 'bhurlow/vim-parinfer'
+Plug 'guns/vim-clojure-static'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 Plug 'bronson/vim-trailing-whitespace'
 
@@ -147,13 +149,18 @@ augroup AuNERDTreeCmd
 set number
 set nowrap
 
-" use deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 nnoremap <C-S> :FZF<CR>
-autocmd BufNewFile,BufRead build.boot set syntax=clojure
 
 autocmd Filetype ruby set softtabstop=2
 autocmd Filetype ruby set sw=2
 autocmd Filetype ruby set ts=2
+
+let switchbuf='usetab'
+
+" set lazyredraw
+" set synmaxcol=128
+syntax sync minlines=256
+
+let g:clojure_maxlines = 1
+
+let g:sexp_enable_insert_mode_mappings = 0
