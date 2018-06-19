@@ -1,71 +1,52 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tpope/vim-sensible'
+Plug 'airblade/vim-rooter'
 
 Plug 'tpope/vim-eunuch'
 
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'roxma/nvim-completion-manager'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'clojure-vim/async-clj-omni'
+Plug 'fszymanski/deoplete-emoji'
 
 Plug 'cocopon/iceberg.vim'
 
 Plug 'vim-airline/vim-airline', "{{{
-  let g:airline#extensions#tabline#enabled         = 1
-  let g:airline#extensions#tabline#left_sep        = ' '
-  let g:airline#extensions#tabline#left_alt_sep    = ' '
-  let g:airline#extensions#tabline#buffer_idx_mode = 1
-  let g:airline#extensions#tabline#formatter       = 'unique_tail'
-  " let g:airline#extensions#tabline#fnamemod        = ':p:.'
-  " let g:airline#extensions#tabline#fnamecollapse   = 0
-  nmap <leader>1 <Plug>AirlineSelectTab1
-  nmap <leader>2 <Plug>AirlineSelectTab2
-  nmap <leader>3 <Plug>AirlineSelectTab3
-  nmap <leader>4 <Plug>AirlineSelectTab4
-  nmap <leader>5 <Plug>AirlineSelectTab5
-  nmap <leader>6 <Plug>AirlineSelectTab6
-  nmap <leader>7 <Plug>AirlineSelectTab7
-  nmap <leader>8 <Plug>AirlineSelectTab8
-  nmap <leader>9 <Plug>AirlineSelectTab9
 
-  let g:airline#extensions#bufferline#enabled = 0
-  let g:airline#extensions#eclim#enabled      = 0
-  let g:airline#extensions#nrrwrgn#enabled    = 0
-  let g:airline#extensions#capslock#enabled   = 0
-  let g:airline#extensions#windowswap#enabled = 0
-
-  let g:airline_theme             = 'serene'
-
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-  let g:airline_left_sep = '›'
-  let g:airline_right_sep = '‹'
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.whitespace = 'Ξ'
-  let g:airline_symbols.branch = 'B'
+  let g:airline_theme             = 'violet'
+  let g:airline#extensions#default#layout = [
+      \ [ 'a', 'c' ],
+      \ [ 'z' ]
+  \ ]
+  let g:airline_section_z = '%3p%% %l'
+  let g:airline_powerline_fonts = 1
+  let g:airline_extensions = []
+  let g:airline_highlighting_cache = 1
 "}}}
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'simeji/winresizer'
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } "{{{
-	map <leader>n :NERDTreeToggle<CR>
-	let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-	let NERDTreeShowHidden=1
-	let NERDTreeMinimalUI=1
-	let NERDTreeWinPos="left"
-	let NERDTreeWinSize=30
-	let NERDTreeDirArrows=1
-	let NERDTreeHijackNetrw = 1
-"}}}
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } "{{{
+"   map <leader>n :NERDTreeToggle<CR>
+"   let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+"   let NERDTreeShowHidden=1
+"   let NERDTreeMinimalUI=1
+"   let NERDTreeWinPos="left"
+"   let NERDTreeWinSize=30
+"   let NERDTreeDirArrows=1
+"   let NERDTreeHijackNetrw = 1
+" "}}}
+Plug 'justinmk/vim-dirvish'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " Plug 'airblade/vim-gitgutter'
 
 " Plug 'unblevable/quick-scope'
+Plug 'mhinz/vim-startify'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -81,6 +62,8 @@ Plug 'guns/vim-clojure-static'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'eraserhd/parinfer-rust', {'do':
+        \  'cargo build --release'}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
@@ -90,56 +73,62 @@ call plug#end()
 
 set rtp+=/usr/local/opt/fzf
 
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+" Auto close preview window when deoplete completion is done
+autocmd CompleteDone * silent! pclose!
+
 colorscheme iceberg
 
-augroup AuNERDTreeCmd
-	autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-	autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
+" augroup AuNERDTreeCmd
+"         autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+"         autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
 
-	function s:CdIfDirectory(directory)
-		let explicitDirectory = isdirectory(a:directory)
-		let directory = explicitDirectory || empty(a:directory)
+"         function s:CdIfDirectory(directory)
+"                 let explicitDirectory = isdirectory(a:directory)
+"                 let directory = explicitDirectory || empty(a:directory)
 
-		if explicitDirectory
-			exe "cd " . fnameescape(a:directory)
-		endif
+"                 if explicitDirectory
+"                         exe "cd " . fnameescape(a:directory)
+"                 endif
 
-		" Allows reading from stdin
-		" ex: git diff | mvim -R -
-		if strlen(a:directory) == 0
-			return
-		endif
+"                 " Allows reading from stdin
+"                 " ex: git diff | mvim -R -
+"                 if strlen(a:directory) == 0
+"                         return
+"                 endif
 
-		if directory
-			NERDTree
-			wincmd p
-			bd
-		endif
+"                 if directory
+"                         NERDTree
+"                         wincmd p
+"                         bd
+"                 endif
 
-		if explicitDirectory
-			wincmd p
-		endif
-	endfunction
+"                 if explicitDirectory
+"                         wincmd p
+"                 endif
+"         endfunction
 
-	" NERDTree utility function
-	function s:UpdateNERDTree(...)
-		let stay = 0
+"         " NERDTree utility function
+"         function s:UpdateNERDTree(...)
+"                 let stay = 0
 
-		if(exists("a:1"))
-			let stay = a:1
-		end
+"                 if(exists("a:1"))
+"                         let stay = a:1
+"                 end
 
-		if exists("t:NERDTreeBufName")
-			let nr = bufwinnr(t:NERDTreeBufName)
-			if nr != -1
-				exe nr . "wincmd w"
-				exe substitute(mapcheck("R"), "<CR>", "", "")
-				if !stay
-					wincmd p
-				end
-			endif
-		endif
-	endfunction
+"                 if exists("t:NERDTreeBufName")
+"                         let nr = bufwinnr(t:NERDTreeBufName)
+"                         if nr != -1
+"                                 exe nr . "wincmd w"
+"                                 exe substitute(mapcheck("R"), "<CR>", "", "")
+"                                 if !stay
+"                                         wincmd p
+"                                 end
+"                         endif
+"                 endif
+"         endfunction
 
 " autocmd vimenter * NERDTree
 " autocmd VimEnter * if !argc() | NERDTree | endif
@@ -151,16 +140,21 @@ set nowrap
 
 nnoremap <C-S> :FZF<CR>
 
-autocmd Filetype ruby set softtabstop=2
-autocmd Filetype ruby set sw=2
-autocmd Filetype ruby set ts=2
+
+" autocmd Filetype ruby set softtabstop=2
+" autocmd Filetype ruby set sw=2
+" autocmd Filetype ruby set ts=2
+" set tabstop=2 softtabstop=2 shiftwidth=2 
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 let switchbuf='usetab'
 
-" set lazyredraw
-" set synmaxcol=128
+set lazyredraw
+set synmaxcol=128
 syntax sync minlines=256
+set inccommand=nosplit
 
-let g:clojure_maxlines = 1
+" let g:clojure_maxlines = 1
 
-let g:sexp_enable_insert_mode_mappings = 0
+set foldmethod=syntax
+set nofoldenable
