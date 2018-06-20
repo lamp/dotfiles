@@ -9,36 +9,13 @@ Plug 'terryma/vim-multiple-cursors'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'clojure-vim/async-clj-omni'
-Plug 'fszymanski/deoplete-emoji'
 
 Plug 'cocopon/iceberg.vim'
 
-Plug 'vim-airline/vim-airline', "{{{
-
-  let g:airline_theme             = 'violet'
-  let g:airline#extensions#default#layout = [
-      \ [ 'a', 'c' ],
-      \ [ 'z' ]
-  \ ]
-  let g:airline_section_z = '%3p%% %l'
-  let g:airline_powerline_fonts = 1
-  let g:airline_extensions = []
-  let g:airline_highlighting_cache = 1
-"}}}
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim',
 
 Plug 'simeji/winresizer'
 
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } "{{{
-"   map <leader>n :NERDTreeToggle<CR>
-"   let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-"   let NERDTreeShowHidden=1
-"   let NERDTreeMinimalUI=1
-"   let NERDTreeWinPos="left"
-"   let NERDTreeWinSize=30
-"   let NERDTreeDirArrows=1
-"   let NERDTreeHijackNetrw = 1
-" "}}}
 Plug 'justinmk/vim-dirvish'
 
 Plug 'tpope/vim-fugitive'
@@ -69,6 +46,8 @@ Plug 'tpope/vim-repeat'
 
 Plug 'bronson/vim-trailing-whitespace'
 
+Plug 'w0rp/ale'
+
 call plug#end()
 
 set rtp+=/usr/local/opt/fzf
@@ -81,71 +60,16 @@ autocmd CompleteDone * silent! pclose!
 
 colorscheme iceberg
 
-" augroup AuNERDTreeCmd
-"         autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-"         autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
-
-"         function s:CdIfDirectory(directory)
-"                 let explicitDirectory = isdirectory(a:directory)
-"                 let directory = explicitDirectory || empty(a:directory)
-
-"                 if explicitDirectory
-"                         exe "cd " . fnameescape(a:directory)
-"                 endif
-
-"                 " Allows reading from stdin
-"                 " ex: git diff | mvim -R -
-"                 if strlen(a:directory) == 0
-"                         return
-"                 endif
-
-"                 if directory
-"                         NERDTree
-"                         wincmd p
-"                         bd
-"                 endif
-
-"                 if explicitDirectory
-"                         wincmd p
-"                 endif
-"         endfunction
-
-"         " NERDTree utility function
-"         function s:UpdateNERDTree(...)
-"                 let stay = 0
-
-"                 if(exists("a:1"))
-"                         let stay = a:1
-"                 end
-
-"                 if exists("t:NERDTreeBufName")
-"                         let nr = bufwinnr(t:NERDTreeBufName)
-"                         if nr != -1
-"                                 exe nr . "wincmd w"
-"                                 exe substitute(mapcheck("R"), "<CR>", "", "")
-"                                 if !stay
-"                                         wincmd p
-"                                 end
-"                         endif
-"                 endif
-"         endfunction
-
-" autocmd vimenter * NERDTree
-" autocmd VimEnter * if !argc() | NERDTree | endif
-" autocmd BufEnter * if !argc() | NERDTreeMirror | endif
-" let g:NERDTreeHijackNetrw = 1
-
 set number
 set nowrap
 
 nnoremap <C-S> :FZF<CR>
 
-
-" autocmd Filetype ruby set softtabstop=2
-" autocmd Filetype ruby set sw=2
-" autocmd Filetype ruby set ts=2
-" set tabstop=2 softtabstop=2 shiftwidth=2 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+let g:rooter_patterns = ['.git/']
+let g:rooter_silent_chdir = 1
+let g:rooter_use_lcd = 1
 
 let switchbuf='usetab'
 
@@ -154,7 +78,27 @@ set synmaxcol=128
 syntax sync minlines=256
 set inccommand=nosplit
 
-" let g:clojure_maxlines = 1
-
 set foldmethod=syntax
 set nofoldenable
+
+" ALE config
+let g:ale_completion_enabled = 0
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'clojure': ['joker']
+\}
+
+" lightline config
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'OldHope',
+      \ 'active': {
+      \   'left': [ [ 'mode' ],
+      \             [ 'gitbranch', 'filename', 'modified' ] ],
+      \   'right': [['percent', 'lineinfo'],
+      \             ['filetype']]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
