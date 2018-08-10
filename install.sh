@@ -17,5 +17,7 @@ git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 source ~/.zshrc
 # install leiningen
 brew install leiningen
+# Install joker
+brew install joker
 # Finish
 print Done!

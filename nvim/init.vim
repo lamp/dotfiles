@@ -3,24 +3,29 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'airblade/vim-rooter'
 
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+" Plug 'tpope/v-projectionist'
+
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'clojure-vim/async-clj-omni'
 
-Plug 'cocopon/iceberg.vim'
+" Plug 'cocopon/iceberg.vim'
+Plug 'kaicataldo/material.vim'
 
 Plug 'itchyny/lightline.vim',
 
 Plug 'simeji/winresizer'
 
 Plug 'justinmk/vim-dirvish'
-
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-" Plug 'airblade/vim-gitgutter'
 
 " Plug 'unblevable/quick-scope'
 Plug 'mhinz/vim-startify'
@@ -34,15 +39,14 @@ Plug 'matze/vim-move', "{{{
 	let g:move_key_modifier = 'C'
 "}}}
 
+" Clojure development
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
         \  'cargo build --release'}
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-salve'
 
 Plug 'bronson/vim-trailing-whitespace'
 
@@ -52,16 +56,26 @@ call plug#end()
 
 set rtp+=/usr/local/opt/fzf
 
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'window': 'belowright split enew', 'down': '~40%' }
+
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#keyword_patterns = {}
 let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 " Auto close preview window when deoplete completion is done
 autocmd CompleteDone * silent! pclose!
 
-colorscheme iceberg
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+colorscheme material
+let g:material_theme_style = 'dark'
+set background=dark
 
 set number
 set nowrap
+set splitright
 
 nnoremap <C-S> :FZF<CR>
 
@@ -75,23 +89,37 @@ let switchbuf='usetab'
 
 set lazyredraw
 set synmaxcol=128
-syntax sync minlines=256
-set inccommand=nosplit
+syntax sync minlines=30
+set norelativenumber
+set re=1
+set ttyfast
+set nocursorline
+set nocursorcolumn
+" set inccommand=nosplit
 
-set foldmethod=syntax
+" set foldmethod=syntax
 set nofoldenable
 
 " ALE config
 let g:ale_completion_enabled = 0
+let g:ale_set_highlights = 0
+" let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_delay = 50
+let g:ale_sign_column_always = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'clojure': ['joker']
+\   'clojure': ['joker'],
+\   'JSON': ['jq'],
+\   'ruby': ['ruby'],
+\   'SQL': ['sqlint']
 \}
 
 " lightline config
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'OldHope',
+      \ 'colorscheme': 'material_vim',
       \ 'active': {
       \   'left': [ [ 'mode' ],
       \             [ 'gitbranch', 'filename', 'modified' ] ],
