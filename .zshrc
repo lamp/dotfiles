@@ -60,6 +60,10 @@ ZSH_THEME="lambda"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  brew
+  lein
+  last-working-dir
+  osx
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -92,25 +96,24 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+source ~/vars.sh
+export PATH="/usr/local/bin:$PATH"
 
-[ -s "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh" ] && source "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-export ARTIFACTORY_USER=matthew.gradidge
-export ARTIFACTORY_PASSWORD="AKCp5aTGfmf2Qs3Ko7Cc3uaZNjF9WQXrAWKUHJXKt6GdqNn27yBKpv5cGwPRGuJcfLKyVXaZF"
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 function reup() {
   source ~/.zshrc
 }
 
-# Ensure Postgres tooling is available on the PATH
+# Ensure Postgres and Kafka tooling is available on the PATH
 export PATH="$PATH:/usr/local/Cellar/postgresql@9.6/9.6.8/bin/"
-export PATH="$PATH:/Users/matthew.gradidge/confluent-tools/confluent-4.0.0/bin"
+export PATH="$PATH:/Users/matthew.gradidge/confluent/bin"
 
 # RBenv init
 eval "$(rbenv init -)"
@@ -118,3 +121,62 @@ eval "$(rbenv init -)"
 # Disable shared history between tabs and panes
 unsetopt inc_append_history
 unsetopt share_history
+
+# make fzf respect gitignore
+export FZF_DEFAULT_COMMAND='fd -H --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+source /Users/matthew.gradidge/work/devtools/.source
+export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+
+[ -s "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh" ] && source "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh"
+
+alias be='bundle exec'
+
+CVSEEDS_PATH="~/work/cvseeds"
+function cv () {
+  # example cv staging vault
+  # Usage cv stage vault_or_consul env
+  ENV="us"
+  if [[ -v $3 ]]
+  then
+    ENV=$3
+  fi
+
+  typeset -A envs
+  envs=("us" "us-east-1" "uk" "eu-west-1" "ce" "eu-central-1")
+
+  cat "$CVSEEDS_PATH/$envs[$ENV]/$1/$2.yaml" | fzf
+}
+
+function puma-stat () {
+  # Requires jq to be installed
+  local ddd
+  for top in topologies-loan-settled task-mux-product-unit-updates task-product-unit-updates view-builders-us-investor-api-holdings topologies-loan-part-repayment-reverser topologies-create-predetermined-repayments topologies-late-fees-laminar-translator
+  do
+    output=$(curl -s -H "Accept: application/json" "https://$top-product-unit-manager.fc-prod.us")
+    ddd+="$top $(echo $output | jq '.["server-status"].status')\n"
+  done
+
+  echo $ddd | column -t
+
+}
+
+function cmdk () {
+  clear && printf '\e[3J'
+}
+
+
+eval "$(direnv hook zsh)"
+
+export OKTA_USERNAME=matthew.gradidge
+okta() {
+   if [ -z "$1" ]; then
+     echo "ERROR => specify profile"
+   else
+     /usr/local/bin/okta_aws -u $OKTA_USERNAME -e https://fundingcircle.okta.com/home/amazon_aws/0oa9dw16cdiT5Hntw0x7/272 -p "$1" -s admin-in-$1 && \
+     source ~/.aws/.aws_env_$1
+     echo "Successfully configured AWS credentials for profile: $1"
+   fi
+ }
