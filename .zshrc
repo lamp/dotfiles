@@ -64,6 +64,8 @@ plugins=(
   lein
   last-working-dir
   osx
+  fzf
+  history
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -180,3 +182,5 @@ okta() {
      echo "Successfully configured AWS credentials for profile: $1"
    fi
  }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
