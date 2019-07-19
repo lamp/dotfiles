@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/matthew.gradidge/.oh-my-zsh
+export ZSH="/Users/$(whoami)/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -99,7 +99,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/vars.sh
+if [ -f ~/vars.sh ]; then
+  source ~/vars.sh
+fi
+
 export PATH="/usr/local/bin:$PATH"
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -137,9 +140,14 @@ setopt HIST_BEEP
 export FZF_DEFAULT_COMMAND='fd -H --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-source /Users/matthew.gradidge/work/devtools/.source
-export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
-export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+if [ -f /Users/matthew.gradidge/work/devtools/.source ]; then
+  source /Users/matthew.gradidge/work/devtools/.source
+fi
+
+if [ -f /usr/local/opt/qt@5.5/bin ]; then
+  export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+  export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+fi
 
 [ -s "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh" ] && source "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh"
 
