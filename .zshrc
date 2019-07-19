@@ -184,3 +184,5 @@ okta() {
  }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias iced='~/.local/share/nvim/plugged/vim-iced/bin/iced'

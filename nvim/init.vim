@@ -15,7 +15,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'Shougo/deoplete.nvim'
-Plug 'clojure-vim/async-clj-omni'
+Plug 'Shougo/neco-syntax'
+" Plug 'clojure-vim/async-clj-omni'
 
 Plug 'cocopon/iceberg.vim'
 Plug 'kaicataldo/material.vim'
@@ -24,6 +25,7 @@ Plug 'jdsimcoe/abstract.vim'
 Plug 'tjammer/blayu.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'koirand/tokyo-metro.vim'
+Plug 'dunstontc/vim-vscode-theme'
 
 Plug 'itchyny/lightline.vim',
 
@@ -45,9 +47,12 @@ Plug 'matze/vim-move', "{{{
 Plug 'kshenoy/vim-signature'
 
 " Clojure development
-Plug 'tpope/vim-fireplace'
+" Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
+Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}
 " Plug 'clojure-vim/acid.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
         \  'cargo build --release'}
@@ -76,24 +81,15 @@ let g:fzf_buffers_jump = 1
 " let g:fzf_layout = { 'window': 'belowright split enew', 'down': '~40%' }
 let g:fzf_layout = { 'down': '~40%' }
 
-let g:deoplete#enable_at_startup = 1
-" let g:deoplete#keyword_patterns = {}
-" let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
-call deoplete#custom#option('keyword_patterns', {
-\ 'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#+]*'
-\})
-
-" Auto close preview window when deoplete completion is done
-autocmd CompleteDone * silent! pclose!
-
 if (has("termguicolors"))
   set termguicolors
 endif
 
+let g:material_theme_style = 'default'
+let g:material_terminal_italics = 1
 colorscheme material
-let g:material_theme_style = 'dark'
-set background=dark
 
+set hidden
 set number
 set nowrap
 set splitright
@@ -116,9 +112,7 @@ set re=1
 set ttyfast
 set nocursorline
 set nocursorcolumn
-" set inccommand=nosplit
 
-" set foldmethod=syntax
 set nofoldenable
 
 " ALE config
@@ -136,6 +130,17 @@ let g:ale_linters = {
 \   'ruby': ['ruby'],
 \   'SQL': ['sqlint']
 \}
+
+let g:deoplete#enable_at_startup = 1
+" let g:deoplete#keyword_patterns = {}
+" let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+call deoplete#custom#option('keyword_patterns', {
+                        \   'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#+]*'
+                        \})
+call deoplete#custom#source('ale', 'rank', 999)
+
+" Auto close preview window when deoplete completion is done
+autocmd CompleteDone * silent! pclose!
 
 " lightline config
 set noshowmode
@@ -158,3 +163,6 @@ let g:python3_host_prog = '/Users/matthew.gradidge/.pyenv/versions/neovim3/bin/p
 " Markdown preview configuration
 let vim_markdown_preview_temp_file=1
 let vim_markdown_preview_github=1
+
+" Iced vim default keybindings enable
+let g:iced_enable_default_key_mappings = v:true
