@@ -149,7 +149,7 @@ if [ -f /usr/local/opt/qt@5.5/bin ]; then
   export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 fi
 
-[ -s "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh" ] && source "/Users/matthew.gradidge/.scm_breeze/scm_breeze.sh"
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
 alias be='bundle exec'
 
@@ -203,3 +203,7 @@ okta() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias iced='~/.local/share/nvim/plugged/vim-iced/bin/iced'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
