@@ -74,6 +74,8 @@ if executable('ctags')
   Plug 'ludovicchabant/vim-gutentags'
 endif
 
+Plug 'ludovicchabant/vim-gutentags'
+
 call plug#end()
 
 set rtp+=/usr/local/opt/fzf
