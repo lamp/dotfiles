@@ -66,6 +66,7 @@ plugins=(
   osx
   fzf
   history
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -123,6 +124,14 @@ eval "$(rbenv init -)"
 # Disable shared history between tabs and panes
 unsetopt inc_append_history
 unsetopt share_history
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_BEEP
 
 # make fzf respect gitignore
 export FZF_DEFAULT_COMMAND='fd -H --type f'

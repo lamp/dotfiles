@@ -52,11 +52,9 @@ Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
 Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}
-" Plug 'clojure-vim/acid.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
         \  'cargo build --release'}
-Plug 'clojure-vim/vim-jack-in'
 " Only in Neovim:
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'clojure-vim/async-clj-highlight'
@@ -113,7 +111,9 @@ set ttyfast
 set nocursorline
 set nocursorcolumn
 
+set foldmethod=syntax
 set nofoldenable
+let g:clojure_fold = 1
 
 " ALE config
 let g:ale_completion_enabled = 0
@@ -166,3 +166,4 @@ let vim_markdown_preview_github=1
 
 " Iced vim default keybindings enable
 let g:iced_enable_default_key_mappings = v:true
+
