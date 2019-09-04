@@ -70,6 +70,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 
 " Handle all the languages, easily
 Plug 'sheerun/vim-polyglot'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
@@ -137,7 +138,11 @@ let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('keyword_patterns', {
                         \   'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#+]*'
                         \})
-call deoplete#custom#source('ale', 'rank', 999)
+call deoplete#custom#option('sources' , {
+      \ '_' : ['tags', 'ale', 'buffer']
+      \})
+call deoplete#custom#option('auto_refresh_delay', 300)
+call deoplete#custom#option('prev_completion_mode', 'false')
 
 " Auto close preview window when deoplete completion is done
 autocmd CompleteDone * silent! pclose!
