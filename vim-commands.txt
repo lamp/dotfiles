@@ -1,2 +1,5 @@
 :PlugInstall
 :wqa
+:CocInstall coc-tag
+:CocInstall coc-syntax
+:CocInstall coc-solargraph
