@@ -14,17 +14,12 @@ Plug 'tpope/vim-rhubarb'
 
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neco-syntax'
-" Plug 'clojure-vim/async-clj-omni'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'clojure-vim/async-clj-omni'
 
 Plug 'cocopon/iceberg.vim'
 Plug 'kaicataldo/material.vim'
-Plug 'ErichDonGubler/vim-sublime-monokai'
-Plug 'jdsimcoe/abstract.vim'
-Plug 'tjammer/blayu.vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'koirand/tokyo-metro.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'dunstontc/vim-vscode-theme'
 
 Plug 'itchyny/lightline.vim',
@@ -70,7 +65,10 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 
 " Handle all the languages, easily
 Plug 'sheerun/vim-polyglot'
-Plug 'ludovicchabant/vim-gutentags'
+" Tags plugin
+if executable('ctags')
+  Plug 'ludovicchabant/vim-gutentags'
+endif
 
 call plug#end()
 
@@ -84,9 +82,11 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:material_theme_style = 'default'
-let g:material_terminal_italics = 1
+let g:material_theme_style = 'darker'
+let g:material_theme_style = 'ocean'
+" let g:material_terminal_italics = 1
 colorscheme material
+let g:nord_cursor_line_number_background = 1
 
 set hidden
 set number
@@ -106,7 +106,7 @@ let switchbuf='usetab'
 set lazyredraw
 set synmaxcol=256
 syntax sync minlines=30
-set norelativenumber
+set relativenumber
 set re=1
 set ttyfast
 set nocursorline
@@ -132,20 +132,27 @@ let g:ale_linters = {
 \   'SQL': ['sqlint']
 \}
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 " let g:deoplete#keyword_patterns = {}
 " let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
-call deoplete#custom#option('keyword_patterns', {
-                        \   'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#+]*'
-                        \})
-call deoplete#custom#option('sources' , {
-      \ '_' : ['tags', 'ale', 'buffer']
-      \})
-call deoplete#custom#option('auto_refresh_delay', 300)
-call deoplete#custom#option('prev_completion_mode', 'false')
+" call deoplete#custom#option({
+"       \ 'sources': {
+"       \ '_' : ['tags', 'ale', 'buffer']
+"       \ },
+"       \ 'keyword_patterns': {
+"       \   'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#+]*'
+"       \},
+"       \ 'auto_refresh_delay': 300,
+"       \ 'prev_completion_mode' : 'false'
+"   \})
+" call deoplete#custom#option('sources' , {
+"       \ '_' : ['tags', 'ale', 'buffer']
+"       \})
+" call deoplete#custom#option('auto_refresh_delay', 300)
+" call deoplete#custom#option('prev_completion_mode', 'false')
 
 " Auto close preview window when deoplete completion is done
-autocmd CompleteDone * silent! pclose!
+" autocmd CompleteDone * silent! pclose!
 
 " lightline config
 set noshowmode
