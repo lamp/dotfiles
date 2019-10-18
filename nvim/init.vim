@@ -78,10 +78,9 @@ Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
-set rtp+=/usr/local/opt/fzf
+set rtp+=/usr/local/bin/fzf
 
 let g:fzf_buffers_jump = 1
-" let g:fzf_layout = { 'window': 'belowright split enew', 'down': '~40%' }
 let g:fzf_layout = { 'down': '~40%' }
 
 if (has("termguicolors"))
@@ -143,27 +142,8 @@ let g:ale_linters = {
 \   'SQL': ['sqlint']
 \}
 
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#keyword_patterns = {}
-" let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
-" call deoplete#custom#option({
-"       \ 'sources': {
-"       \ '_' : ['tags', 'ale', 'buffer']
-"       \ },
-"       \ 'keyword_patterns': {
-"       \   'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#+]*'
-"       \},
-"       \ 'auto_refresh_delay': 300,
-"       \ 'prev_completion_mode' : 'false'
-"   \})
-" call deoplete#custom#option('sources' , {
-"       \ '_' : ['tags', 'ale', 'buffer']
-"       \})
-" call deoplete#custom#option('auto_refresh_delay', 300)
-" call deoplete#custom#option('prev_completion_mode', 'false')
-
-" Auto close preview window when deoplete completion is done
-" autocmd CompleteDone * silent! pclose!
+let g:python_host_prog = "/Users/" + system('whoami') + "/.pyenv/versions/neovim2/bin/python"
+let g:python3_host_prog = "/Users/" + system('whoami') + "/.pyenv/versions/neovim3/bin/python"
 
 " lightline config
 set noshowmode
@@ -179,9 +159,6 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-
-let g:python_host_prog = '/Users/matthew.gradidge/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/matthew.gradidge/.pyenv/versions/neovim3/bin/python'
 
 " Markdown preview configuration
 let vim_markdown_preview_temp_file=1
