@@ -18,7 +18,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'clojure-vim/async-clj-omni'
 
 Plug 'cocopon/iceberg.vim'
+Plug 'sickill/vim-monokai'
 Plug 'kaicataldo/material.vim'
+Plug 'gregsexton/Muon'
+Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'arcticicestudio/nord-vim'
 Plug 'dunstontc/vim-vscode-theme'
 
@@ -81,12 +84,17 @@ let g:fzf_layout = { 'down': '~40%' }
 if (has("termguicolors"))
   set termguicolors
 endif
+set background=dark
 
-let g:material_theme_style = 'darker'
 let g:material_theme_style = 'ocean'
+let g:material_theme_style = 'palenight'
+let g:material_theme_style = 'default'
+let g:material_theme_style = 'darker'
+
 " let g:material_terminal_italics = 1
 colorscheme material
-let g:nord_cursor_line_number_background = 1
+" colorscheme monokai
+" colorscheme muon
 
 set hidden
 set number
