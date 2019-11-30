@@ -63,7 +63,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'w0rp/ale'
 
 " Auto pair everything except for clj
-Plug 'jiangmiao/auto-pairs', { 'for': ['ruby', 'javascript', 'sql', 'python']}
+Plug 'jiangmiao/auto-pairs', { 'for': ['ruby', 'javascript', 'sql', 'python', 'rust']}
 
 Plug 'JamshedVesuna/vim-markdown-preview'
 

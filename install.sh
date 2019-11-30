@@ -17,6 +17,9 @@ git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
 source ~/.zshrc
 
+# Install rustup
+curl https://sh.rustup.rs -sSf | sh
+
 # install leiningen
 brew install leiningen
 # Install joker
