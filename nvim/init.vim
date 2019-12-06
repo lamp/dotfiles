@@ -15,9 +15,6 @@ Plug 'tpope/vim-rhubarb'
 
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'clojure-vim/async-clj-omni'
-
 Plug 'cocopon/iceberg.vim'
 Plug 'sickill/vim-monokai'
 Plug 'kaicataldo/material.vim'
@@ -45,12 +42,19 @@ Plug 'matze/vim-move', "{{{
 "}}}
 Plug 'kshenoy/vim-signature'
 
+" Autocompletion
+Plug 'prabirshrestha/asyncomplete-tags.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
 " Clojure development
-" Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
 Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}
+" Clojure Autocompletion
+Plug 'liquidz/vim-iced-asyncomplete', {'for': 'clojure'}
+
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
         \  'cargo build --release'}
@@ -72,9 +76,9 @@ Plug 'sheerun/vim-polyglot'
 " Tags plugin
 if executable('ctags')
   Plug 'ludovicchabant/vim-gutentags'
+  Plug 'prabirshrestha/asyncomplete-tags.vim'
 endif
 
-Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
@@ -167,3 +171,23 @@ let vim_markdown_preview_github=1
 " Iced vim default keybindings enable
 let g:iced_enable_default_key_mappings = v:true
 
+" Asyncomplete config
+" Rust
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+" Ruby
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+endif
