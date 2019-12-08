@@ -9,6 +9,7 @@ brew install neovim
 # Copy neovim config file
 mkdir ~/.config/
 ln -sFv "$(pwd)/nvim/init.vim" ~/.config/nvim/init.vim
+
 # Install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -22,6 +23,10 @@ curl https://sh.rustup.rs -sSf | sh
 
 # install leiningen
 brew install leiningen
+# Install clojure config
+ln -sFv "$(pwd)/shadow-cljs/config.edn" ~/.shadow-cljs/config.edn
+ln -sFv "$(pwd)/lein/profiles.clj" ~/.lein/profiles.clj
+
 # Install joker
 brew install joker
 brew install clj-kondo

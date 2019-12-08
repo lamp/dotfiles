@@ -43,7 +43,7 @@ Plug 'matze/vim-move', "{{{
 Plug 'kshenoy/vim-signature'
 
 " Autocompletion
-Plug 'prabirshrestha/asyncomplete-tags.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 
@@ -146,8 +146,8 @@ let g:ale_linters = {
 \   'SQL': ['sqlint']
 \}
 
-let g:python_host_prog = "/Users/" + system('whoami') + "/.pyenv/versions/neovim2/bin/python"
-let g:python3_host_prog = "/Users/" + system('whoami') + "/.pyenv/versions/neovim3/bin/python"
+let g:python_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim2/bin/python"
+let g:python3_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim3/bin/python"
 
 " lightline config
 set noshowmode
