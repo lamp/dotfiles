@@ -43,9 +43,11 @@ Plug 'matze/vim-move', "{{{
 Plug 'kshenoy/vim-signature'
 
 " Autocompletion
-Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Clojure development
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
@@ -191,3 +193,30 @@ if executable('solargraph')
         \ 'whitelist': ['ruby'],
         \ })
 endif
+
+" Buffer
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ 'config': {
+    \    'max_buffer_size': 5000000,
+    \  },
+    \ }))
+
+" CTAGS
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+    \ 'name': 'tags',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#tags#completor'),
+    \ 'config': {
+    \    'max_file_size': 50000000,
+    \  },
+    \ }))
+
+" Clojure
+" call asyncomplete#register_source({
+"       \ 'name': 'vim-iced',
+"       \ 'whitelist': ['clojure'],
+"       \ 'completor': function('iced#asyncomplete#complete'),
+"       \ })
