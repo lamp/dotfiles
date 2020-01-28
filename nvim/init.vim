@@ -43,11 +43,13 @@ Plug 'matze/vim-move', "{{{
 Plug 'kshenoy/vim-signature'
 
 " Autocompletion
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'ncm2/ncm2-vim-lsp'
+Plug 'ncm2/ncm2-tagprefix'
 
 " Clojure development
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
@@ -55,7 +57,7 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
 Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}
 " Clojure Autocompletion
-Plug 'liquidz/vim-iced-asyncomplete', {'for': 'clojure'}
+Plug 'nbardiuk/vim-iced-ncm2'
 
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
@@ -78,7 +80,6 @@ Plug 'sheerun/vim-polyglot'
 " Tags plugin
 if executable('ctags')
   Plug 'ludovicchabant/vim-gutentags'
-  Plug 'prabirshrestha/asyncomplete-tags.vim'
 endif
 
 
@@ -173,7 +174,11 @@ let vim_markdown_preview_github=1
 " Iced vim default keybindings enable
 let g:iced_enable_default_key_mappings = v:true
 
-" Asyncomplete config
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+" LSP config
 " Rust
 if executable('rls')
     au User lsp_setup call lsp#register_server({
@@ -193,30 +198,3 @@ if executable('solargraph')
         \ 'whitelist': ['ruby'],
         \ })
 endif
-
-" Buffer
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    \ 'name': 'buffer',
-    \ 'whitelist': ['*'],
-    \ 'completor': function('asyncomplete#sources#buffer#completor'),
-    \ 'config': {
-    \    'max_buffer_size': 5000000,
-    \  },
-    \ }))
-
-" CTAGS
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
-    \ 'name': 'tags',
-    \ 'whitelist': ['*'],
-    \ 'completor': function('asyncomplete#sources#tags#completor'),
-    \ 'config': {
-    \    'max_file_size': 50000000,
-    \  },
-    \ }))
-
-" Clojure
-" call asyncomplete#register_source({
-"       \ 'name': 'vim-iced',
-"       \ 'whitelist': ['clojure'],
-"       \ 'completor': function('iced#asyncomplete#complete'),
-"       \ })
