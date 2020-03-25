@@ -76,12 +76,23 @@ Plug 'jiangmiao/auto-pairs', { 'for': ['ruby', 'javascript', 'sql', 'python', 'r
 Plug 'JamshedVesuna/vim-markdown-preview'
 
 " Handle all the languages, easily
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot', "{{{
+  let g:polyglot_disabled = ['elm']
+"}}}
+"
 " Tags plugin
 if executable('ctags')
-  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'ludovicchabant/vim-gutentags', "{{{
+    let g:gutentags_file_list_command = {
+      \ 'markers': {
+      \ '.git': 'git ls-files',
+      \ },
+      \ }
+  "}}}
 endif
 
+" Elm
+Plug 'elmcast/elm-vim'
 
 call plug#end()
 
