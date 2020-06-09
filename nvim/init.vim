@@ -50,6 +50,9 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'ncm2/ncm2-vim-lsp'
 Plug 'ncm2/ncm2-tagprefix'
+Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+Plug 'ncm2/ncm2-path'
+Plug 'fgrsnau/ncm2-otherbuf'
 
 " Clojure development
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
