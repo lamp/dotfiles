@@ -42,6 +42,10 @@ Plug 'matze/vim-move', "{{{
 "}}}
 Plug 'kshenoy/vim-signature'
 
+" Rails/ruby
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+
 " Autocompletion
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
