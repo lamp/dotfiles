@@ -39,6 +39,8 @@ brew install rbenv
 brew install ruby-build
 brew install pyenv
 brew install autojump
+brew install ctags
+ln -sFv "$(pwd).ctags" .ctags
 
 # ensure system ruby is a recent version
 rbenv install 2.7.1
