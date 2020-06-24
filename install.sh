@@ -34,12 +34,23 @@ brew install joker
 brew install clj-kondo
 # misc
 brew install rbenv
+brew install ruby-build
 brew install pyenv
 brew install autojump
+
+# ensure system ruby is a recent version
+rbenv install 2.7.1
+rbenv global 2.7.1
 
 # ruby language server
 sudo gem install solargraph
 # install neovim dependencies
 nvim -s vim-commands.txt
+
+# install tmux and tpm
+brew install tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+gem install tmuxinator
+ln -sFv "$(pwd)/tmux.conf" ~/.tmux.conf
 # Finish
 print Done!

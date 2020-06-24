@@ -197,6 +197,7 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
 " LSP config
+let g:lsp_diagnostics_enabled = 0
 " Rust
 if executable('rls')
     au User lsp_setup call lsp#register_server({
