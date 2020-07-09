@@ -64,6 +64,7 @@ Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
 Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}
+Plug 'liquidz/vim-iced-kaocha'
 " Clojure Autocompletion
 Plug 'nbardiuk/vim-iced-ncm2'
 
