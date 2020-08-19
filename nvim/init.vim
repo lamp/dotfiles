@@ -15,13 +15,7 @@ Plug 'tpope/vim-rhubarb'
 
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'cocopon/iceberg.vim'
-Plug 'sickill/vim-monokai'
 Plug 'kaicataldo/material.vim'
-Plug 'gregsexton/Muon'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'arcticicestudio/nord-vim'
-Plug 'dunstontc/vim-vscode-theme'
 
 Plug 'itchyny/lightline.vim',
 
@@ -32,7 +26,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'unblevable/quick-scope'
 Plug 'mhinz/vim-startify'
 
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'ddollar/nerdcommenter'
@@ -73,7 +67,6 @@ Plug 'eraserhd/parinfer-rust', {'do':
         \  'cargo build --release'}
 " Only in Neovim:
 Plug 'radenling/vim-dispatch-neovim'
-Plug 'clojure-vim/async-clj-highlight'
 
 Plug 'bronson/vim-trailing-whitespace'
 
@@ -109,21 +102,16 @@ set rtp+=/usr/local/bin/fzf
 
 let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_preview_window = ''
 
 if (has("termguicolors"))
   set termguicolors
 endif
 set background=dark
 
-let g:material_theme_style = 'ocean'
-let g:material_theme_style = 'palenight'
-let g:material_theme_style = 'default'
 let g:material_theme_style = 'darker'
 
-" let g:material_terminal_italics = 1
 colorscheme material
-" colorscheme monokai
-" colorscheme muon
 
 set hidden
 set number
