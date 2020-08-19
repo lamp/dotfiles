@@ -1,7 +1,11 @@
-# Install Oh My ZSH
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Install zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 # Copy zsh config
 ln -sFv "$(pwd)/.zshrc" ~/.zshrc
+
+# install zsh dependencies
+zplug install
+
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # Install neovim

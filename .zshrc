@@ -58,18 +58,27 @@ ZSH_THEME="lambda"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  brew
-  lein
-  last-working-dir
-  osx
-  fzf
-  history
-  zsh-autosuggestions
-)
+source ~/.zplug/init.zsh
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/brew",   from:oh-my-zsh
+zplug "plugins/lein",   from:oh-my-zsh
+zplug "plugins/last-working-dir",   from:oh-my-zsh
+zplug "plugins/osx",   from:oh-my-zsh
+zplug "plugins/fzf",   from:oh-my-zsh
+zplug "plugins/history",   from:oh-my-zsh
+zplug "plugins/zsh-autosuggestions",   from:oh-my-zsh
+zplug "zsh-users/zsh-history-substring-search", defer:2
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-source $ZSH/oh-my-zsh.sh
+zplug 'azahi/zsh-lambda', as:theme
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
 
 # User configuration
 
@@ -152,22 +161,6 @@ fi
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
 alias be='bundle exec'
-
-CVSEEDS_PATH="~/work/cvseeds"
-function cv () {
-  # example cv staging vault
-  # Usage cv stage vault_or_consul env
-  ENV="us"
-  if [[ -v $3 ]]
-  then
-    ENV=$3
-  fi
-
-  typeset -A envs
-  envs=("us" "us-east-1" "uk" "eu-west-1" "ce" "eu-central-1")
-
-  cat "$CVSEEDS_PATH/$envs[$ENV]/$1/$2.yaml" | fzf
-}
 
 function puma-stat () {
   # Requires jq to be installed
