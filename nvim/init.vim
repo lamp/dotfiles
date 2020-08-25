@@ -15,7 +15,7 @@ Plug 'tpope/vim-rhubarb'
 
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'kaicataldo/material.vim'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 
 Plug 'itchyny/lightline.vim',
 
@@ -70,7 +70,7 @@ Plug 'radenling/vim-dispatch-neovim'
 
 Plug 'bronson/vim-trailing-whitespace'
 
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Auto pair everything except for clj
 Plug 'jiangmiao/auto-pairs', { 'for': ['ruby', 'javascript', 'sql', 'python', 'rust']}
@@ -142,20 +142,20 @@ set nofoldenable
 let g:clojure_fold = 1
 
 " ALE config
-let g:ale_completion_enabled = 0
-let g:ale_set_highlights = 0
+" let g:ale_completion_enabled = 0
+" let g:ale_set_highlights = 0
+" " let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_delay = 50
+" let g:ale_sign_column_always = 0
 " let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_delay = 50
-let g:ale_sign_column_always = 0
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'clojure': ['joker','clj-kondo'],
-\   'JSON': ['jq'],
-\   'ruby': ['ruby'],
-\   'SQL': ['sqlint']
-\}
+" let g:ale_lint_on_enter = 0
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \   'clojure': ['joker','clj-kondo'],
+" \   'JSON': ['jq'],
+" \   'ruby': ['ruby'],
+" \   'SQL': ['sqlint']
+" \}
 
 let g:python_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim2/bin/python"
 let g:python3_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim3/bin/python"
@@ -187,14 +187,19 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
 " LSP config
-let g:lsp_diagnostics_enabled = 0
+" let g:lsp_diagnostics_enabled = 0
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_highlight_references_enabled = 1
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
 " Rust
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
         \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
         \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-        \ 'whitelist': ['rust'],
+        \ 'allowlist': ['rust'],
         \ })
 endif
 " Ruby
@@ -204,7 +209,7 @@ if executable('solargraph')
         \ 'name': 'solargraph',
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
         \ 'initialization_options': {"diagnostics": "true"},
-        \ 'whitelist': ['ruby'],
+        \ 'allowlist': ['ruby'],
         \ })
 endif
 
@@ -212,5 +217,15 @@ au User lsp_setup call lsp#register_server({
       \ 'name': 'javascript support using typescript-language-server',
       \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
       \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
-      \ 'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact'],
+      \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact'],
       \ })
+
+if executable('clj-kondo')
+  " in home directory
+  " wget -o clj-kondo-lsp https://github.com/borkdude/clj-kondo/releases/download/v2020.07.29/clj-kondo-lsp-server-2020.07.29-standalone.jar
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'clj-kondo',
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -jar ~/clj-kondo-lsp']},
+    \ 'allowlist': ['clojure', 'clojurescript']
+    \ })
+endif
