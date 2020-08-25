@@ -187,12 +187,9 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
 " LSP config
-" let g:lsp_diagnostics_enabled = 0
 let g:lsp_signs_enabled = 1         " enable signs
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_highlight_references_enabled = 1
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
 " Rust
 if executable('rls')
     au User lsp_setup call lsp#register_server({
