@@ -9,6 +9,7 @@ zplug "plugins/history",   from:oh-my-zsh, defer:2
 zplug "plugins/zsh-autosuggestions",   from:oh-my-zsh, defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-autosuggestions", defer:2
 
 zplug 'themes/lambda', as:theme, from:oh-my-zsh
 
