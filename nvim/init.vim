@@ -21,7 +21,7 @@ Plug 'itchyny/lightline.vim',
 
 Plug 'simeji/winresizer'
 
-Plug 'justinmk/vim-dirvish'
+Plug 'lambdalisue/fern.vim'
 
 Plug 'unblevable/quick-scope'
 Plug 'mhinz/vim-startify'
@@ -59,6 +59,8 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
 Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}
 Plug 'liquidz/vim-iced-kaocha'
+
+Plug 'liquidz/vim-iced-fern-debugger', {'for': 'clojure'}
 " Clojure Autocompletion
 Plug 'nbardiuk/vim-iced-ncm2'
 
@@ -119,11 +121,12 @@ set nowrap
 set splitright
 
 nnoremap <C-S> :FZF<CR>
+nnoremap <leader>e :Fern . -drawer<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 let g:rooter_patterns = ['.git/']
-let g:rooter_silent_chdir = 1
+" let g:rooter_silent_chdir = 1
 let g:rooter_cd_cmd="lcd"
 
 let switchbuf='usetab'
