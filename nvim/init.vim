@@ -111,7 +111,7 @@ if (has("termguicolors"))
 endif
 set background=dark
 
-let g:material_theme_style = 'darker'
+let g:material_theme_style = 'ocean'
 
 colorscheme material
 
