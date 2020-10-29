@@ -121,7 +121,7 @@ set nowrap
 set splitright
 
 nnoremap <C-S> :FZF<CR>
-nnoremap <leader>e :Fern . -drawer<CR>
+nnoremap <leader>e :Fern . -drawer -toggle<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
