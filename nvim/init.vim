@@ -220,12 +220,21 @@ au User lsp_setup call lsp#register_server({
       \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact'],
       \ })
 
-if executable('clj-kondo')
-  " in home directory
-  " wget -O clj-kondo-lsp https://github.com/borkdude/clj-kondo/releases/download/v2020.07.29/clj-kondo-lsp-server-2020.07.29-standalone.jar
-  au User lsp_setup call lsp#register_server({
-    \ 'name': 'clj-kondo',
-    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -jar ~/clj-kondo-lsp']},
-    \ 'allowlist': ['clojure', 'clojurescript']
-    \ })
-endif
+" clj-kondo lsp config
+" if executable('clj-kondo')
+"   " in home directory
+"   " wget -O clj-kondo-lsp https://github.com/borkdude/clj-kondo/releases/download/v2020.07.29/clj-kondo-lsp-server-2020.07.29-standalone.jar
+"   au User lsp_setup call lsp#register_server({
+"     \ 'name': 'clj-kondo',
+"     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -jar ~/clj-kondo-lsp']},
+"     \ 'allowlist': ['clojure', 'clojurescript']
+"     \ })
+" endif
+
+
+" clojure lsp config
+au User lsp_setup call lsp#register_server({
+      \ 'name': 'clojure-lsp',
+      \ 'cmd': {server_info->[&shell, &shellcmdflag, '~/clojure-lsp']},
+      \ 'allowlist': ['clojure', 'clojurescript']
+      \ })
