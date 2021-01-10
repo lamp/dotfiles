@@ -121,7 +121,7 @@ set nowrap
 set splitright
 
 nnoremap <C-S> :FZF<CR>
-nnoremap <leader>e :Fern . -drawer -toggle<CR>
+nnoremap <leader>e :Fern . -drawer -toggle -reveal=%<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
@@ -223,7 +223,7 @@ au User lsp_setup call lsp#register_server({
 " clj-kondo lsp config
 " if executable('clj-kondo')
 "   " in home directory
-"   " wget -O clj-kondo-lsp https://github.com/borkdude/clj-kondo/releases/download/v2020.07.29/clj-kondo-lsp-server-2020.07.29-standalone.jar
+"   " wget -O clj-kondo-lsp https://github.com/clj-kondo/clj-kondo/releases/download/v2020.12.12/clj-kondo-lsp-server-2020.12.12-standalone.jar
 "   au User lsp_setup call lsp#register_server({
 "     \ 'name': 'clj-kondo',
 "     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -jar ~/clj-kondo-lsp']},
