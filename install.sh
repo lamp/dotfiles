@@ -40,6 +40,8 @@ ln -sFv "$(pwd)/lein/profiles.clj" ~/.lein/profiles.clj
 # Install joker
 brew install joker
 brew install clj-kondo
+# Scripting in clojure
+brew install borkdude/brew/babashka
 # misc
 brew install rbenv
 brew install ruby-build
