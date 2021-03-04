@@ -1,3 +1,5 @@
+# print all the things
+set -x
 # Install zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 # Copy zsh config
@@ -26,7 +28,6 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 # install scm breeze
 git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
-source ~/.zshrc
 
 # Install rustup
 curl https://sh.rustup.rs -sSf | sh
@@ -48,6 +49,7 @@ brew install ruby-build
 brew install pyenv
 brew install autojump
 brew install ctags
+brew install direnv
 ln -sFv "$(pwd).ctags" .ctags
 
 # ensure system ruby is a recent version
@@ -64,5 +66,7 @@ brew install tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 gem install tmuxinator
 ln -sFv "$(pwd)/tmux.conf" ~/.tmux.conf
+
+source ~/.zshrc
 # Finish
 print Done!

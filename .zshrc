@@ -50,7 +50,9 @@ export PATH="$PATH:/usr/local/Cellar/postgresql@9.6/9.6.8/bin/"
 export PATH="$PATH:/Users/matthew.gradidge/confluent/bin"
 
 # RBenv init
-eval "$(rbenv init -)"
+if [[ -f /usr/local/bin/rbenv ]]; then
+  eval "$(rbenv init -)"
+fi
 
 # Disable shared history between tabs and panes
 unsetopt inc_append_history
@@ -124,3 +126,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Rustup config
 source $HOME/.cargo/env
+
+[ -s "/Users/matt/.scm_breeze/scm_breeze.sh" ] && source "/Users/matt/.scm_breeze/scm_breeze.sh"
+
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
