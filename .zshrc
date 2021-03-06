@@ -33,12 +33,6 @@ fi
 
 export PATH="/usr/local/bin:$PATH"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 function reup() {
@@ -72,10 +66,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Always use homebrew openssl
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
+# fc delete after 28/5/2021
 if [ -f /Users/matthew.gradidge/work/devtools/.source ]; then
   source /Users/matthew.gradidge/work/devtools/.source
 fi
 
+# fundingcircle app, delete after 28/5/2021
 if [ -f /usr/local/opt/qt@5.5/bin ]; then
   export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
   export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
@@ -85,36 +81,12 @@ fi
 
 alias be='bundle exec'
 
-function puma-stat () {
-  # Requires jq to be installed
-  local ddd
-  for top in topologies-loan-settled task-mux-product-unit-updates task-product-unit-updates view-builders-us-investor-api-holdings topologies-loan-part-repayment-reverser topologies-create-predetermined-repayments topologies-late-fees-laminar-translator
-  do
-    output=$(curl -s -H "Accept: application/json" "https://$top-product-unit-manager.fc-prod.us")
-    ddd+="$top $(echo $output | jq '.["server-status"].status')\n"
-  done
-
-  echo $ddd | column -t
-
-}
-
 function cmdk () {
   clear && printf '\e[3J'
 }
 
-
 eval "$(direnv hook zsh)"
 
-export OKTA_USERNAME=matthew.gradidge
-okta() {
-   if [ -z "$1" ]; then
-     echo "ERROR => specify profile"
-   else
-     /usr/local/bin/okta_aws -u $OKTA_USERNAME -e https://fundingcircle.okta.com/home/amazon_aws/0oa9dw16cdiT5Hntw0x7/272 -p "$1" -s admin-in-$1 && \
-     source ~/.aws/.aws_env_$1
-     echo "Successfully configured AWS credentials for profile: $1"
-   fi
- }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -132,5 +104,10 @@ source $HOME/.cargo/env
 # Shopify
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
-export ARTIFACTORY_PASSWORD=AKCp8ihLAaxtxxGYphASMfm7zhFzBHqN9SsiLGbofzUMsog9uWziLEV2YECCcrRvZSnieNXAc
-export ARTIFACTORY_USER=matthew.gradidge@fundingcircle.com
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+

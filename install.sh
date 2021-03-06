@@ -48,10 +48,14 @@ brew install borkdude/brew/babashka
 # misc
 brew install rbenv
 brew install ruby-build
+brew install fzf
+brew install fd
 brew install pyenv
+brew install pyenv-virtualenv
 brew install autojump
 brew install ctags
 brew install direnv
+
 ln -sFv "$(pwd).ctags" .ctags
 
 # ensure system ruby is a recent version
@@ -62,6 +66,17 @@ rbenv global 2.7.1
 sudo gem install solargraph
 # install neovim dependencies
 nvim -s vim-commands.txt
+
+
+#  Python for neovim
+pyenv virtualenv 2.7.14 neovim2
+pyenv virtualenv 3.9.1 neovim3
+
+pyenv activate neovim2
+pip install pynvim
+
+pyenv activate neovim3
+pip install pynvim
 
 # install tmux and tpm
 brew install tmux
