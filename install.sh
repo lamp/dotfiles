@@ -20,7 +20,9 @@ ln -sFv "$(pwd)/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
 
 ln -sFv "$(pwd)/.gitignore" ~/.gitignore
 
-ln -sFv "$(pwd)/.tmux.conf" ~/.tmux.conf 
+ln -sFv "$(pwd)/.tmux.conf" ~/.tmux.conf
+
+ln -sFv "$(pwd)./.gitconfig" ~/.gitconfig
 
 # Install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -129,4 +129,8 @@ source $HOME/.cargo/env
 
 [ -s "/Users/matt/.scm_breeze/scm_breeze.sh" ] && source "/Users/matt/.scm_breeze/scm_breeze.sh"
 
+# Shopify
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+export ARTIFACTORY_PASSWORD=AKCp8ihLAaxtxxGYphASMfm7zhFzBHqN9SsiLGbofzUMsog9uWziLEV2YECCcrRvZSnieNXAc
+export ARTIFACTORY_USER=matthew.gradidge@fundingcircle.com
