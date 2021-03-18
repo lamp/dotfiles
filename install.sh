@@ -16,6 +16,7 @@ brew install neovim
 mkdir ~/.config/
 ln -sFv "$(pwd)/nvim/init.vim" ~/.config/nvim/init.vim
 # alacritty config
+mkdir  ~/.config/alacritty
 ln -sFv "$(pwd)/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
 ln -sFv "$(pwd)/.gitignore" ~/.gitignore
 ln -sFv "$(pwd)/.tmux.conf" ~/.tmux.conf
