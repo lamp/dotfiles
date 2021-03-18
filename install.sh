@@ -53,6 +53,7 @@ brew install pyenv-virtualenv
 brew install autojump
 brew install ctags
 brew install direnv
+brew install clojure-lsp/brew/clojure-lsp-native
 
 ln -sFv "$(pwd).ctags" .ctags
 
