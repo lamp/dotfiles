@@ -104,6 +104,10 @@ source $HOME/.cargo/env
 # Shopify
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
+if type chruby > /dev/null; then
+  chruby 2.7.2
+fi
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then

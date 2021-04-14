@@ -102,8 +102,8 @@ call plug#end()
 set rtp+=/usr/local/bin/fzf
 
 let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'down': '~40%' }
-let g:fzf_preview_window = ''
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.4 }}
+let g:fzf_preview_window = ['right:30%']
 
 if (has("termguicolors"))
   set termguicolors
@@ -120,6 +120,7 @@ set nowrap
 set splitright
 
 nnoremap <C-S> :FZF<CR>
+nnoremap <leader>g :Ag<CR>
 nnoremap <leader>e :Fern . -drawer -toggle -reveal=%<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
@@ -142,22 +143,6 @@ set nocursorcolumn
 set foldmethod=syntax
 set nofoldenable
 let g:clojure_fold = 1
-
-" ALE config
-" let g:ale_completion_enabled = 0
-" let g:ale_set_highlights = 0
-" " let g:ale_lint_on_text_changed = 'never'
-" let g:ale_lint_delay = 50
-" let g:ale_sign_column_always = 0
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_lint_on_enter = 0
-" let g:ale_linters = {
-" \   'javascript': ['eslint'],
-" \   'clojure': ['joker','clj-kondo'],
-" \   'JSON': ['jq'],
-" \   'ruby': ['ruby'],
-" \   'SQL': ['sqlint']
-" \}
 
 let g:python_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim2/bin/python"
 let g:python3_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim3/bin/python"
@@ -236,6 +221,6 @@ endif
 " clojure lsp config
 au User lsp_setup call lsp#register_server({
       \ 'name': 'clojure-lsp',
-      \ 'cmd': {server_info->[&shell, &shellcmdflag, '~/clojure-lsp']},
+      \ 'cmd': {server_info->[&shell, &shellcmdflag, 'clojure-lsp']},
       \ 'allowlist': ['clojure', 'clojurescript']
       \ })
