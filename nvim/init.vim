@@ -38,7 +38,6 @@ Plug 'kshenoy/vim-signature'
 
 " Rails/ruby
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-endwise'
 
 " Autocompletion
 Plug 'ncm2/ncm2'
@@ -71,13 +70,12 @@ Plug 'radenling/vim-dispatch-neovim'
 
 Plug 'bronson/vim-trailing-whitespace'
 
-" Plug 'w0rp/ale'
-
-" Auto pair everything except for clj
-Plug 'jiangmiao/auto-pairs', { 'for': ['ruby', 'javascript', 'sql', 'python', 'rust']}
+" Auto pair
+Plug 'cohama/lexima.vim'
 
 Plug 'JamshedVesuna/vim-markdown-preview'
 
+Plug 'vim-test/vim-test'
 " Handle all the languages, easily
 Plug 'sheerun/vim-polyglot', "{{{
   let g:polyglot_disabled = ['elm']
@@ -173,6 +171,9 @@ let g:iced_enable_default_key_mappings = v:true
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
+" Use neovim strategy for testing
+let test#strategy = 'neovim'
+
 " LSP config
 let g:lsp_signs_enabled = 1         " enable signs
 let g:lsp_diagnostics_echo_cursor = 1
@@ -205,18 +206,6 @@ if executable('typescript-language-server')
         \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.jsx'],
         \ })
 endif
-
-" clj-kondo lsp config
-" if executable('clj-kondo')
-"   " in home directory
-"   " wget -O clj-kondo-lsp https://github.com/clj-kondo/clj-kondo/releases/download/v2020.12.12/clj-kondo-lsp-server-2020.12.12-standalone.jar
-"   au User lsp_setup call lsp#register_server({
-"     \ 'name': 'clj-kondo',
-"     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'java -jar ~/clj-kondo-lsp']},
-"     \ 'allowlist': ['clojure', 'clojurescript']
-"     \ })
-" endif
-
 
 " clojure lsp config
 au User lsp_setup call lsp#register_server({
