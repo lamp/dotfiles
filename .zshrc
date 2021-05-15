@@ -63,6 +63,7 @@ setopt HIST_BEEP
 # make fzf respect gitignore
 export FZF_DEFAULT_COMMAND='fd -H --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTIONS='-m --cycle'
 # Always use homebrew openssl
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
