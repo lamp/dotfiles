@@ -32,12 +32,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'ddollar/nerdcommenter'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'matze/vim-move', "{{{
-	let g:move_key_modifier = 'C'
+  let g:move_key_modifier = 'C'
 "}}}
 Plug 'kshenoy/vim-signature'
 
 " Rails/ruby
-Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails', {'for': 'ruby'}
 
 " Autocompletion
 Plug 'ncm2/ncm2'
@@ -56,7 +56,7 @@ Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
 Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}
-Plug 'liquidz/vim-iced-kaocha'
+Plug 'liquidz/vim-iced-kaocha', {'for': 'clojure'}
 
 Plug 'liquidz/vim-iced-fern-debugger', {'for': 'clojure'}
 " Clojure Autocompletion
@@ -117,14 +117,16 @@ set number
 set nowrap
 set splitright
 
+" FZF mappings
 nnoremap <C-S> :FZF<CR>
 nnoremap <leader>g :Ag<CR>
+nnoremap <leader>k :Commands<CR>
 nnoremap <leader>e :Fern . -drawer -toggle -reveal=%<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 let g:rooter_patterns = ['.git/']
-" let g:rooter_silent_chdir = 1
+let g:rooter_silent_chdir = 1
 let g:rooter_cd_cmd="lcd"
 
 let switchbuf='usetab'
@@ -133,13 +135,13 @@ set lazyredraw
 set synmaxcol=256
 syntax sync minlines=30
 set relativenumber
-set re=1
+" set re=1
 set ttyfast
 set nocursorline
 set nocursorcolumn
 
-set foldmethod=syntax
 set nofoldenable
+set foldmethod=syntax
 let g:clojure_fold = 1
 
 let g:python_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim2/bin/python"
