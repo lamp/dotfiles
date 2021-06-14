@@ -82,12 +82,7 @@ fi
 
 alias be='bundle exec'
 
-function cmdk () {
-  clear && printf '\e[3J'
-}
-
 eval "$(direnv hook zsh)"
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -108,11 +103,3 @@ source $HOME/.cargo/env
 if type chruby > /dev/null; then
   chruby 2.7.2
 fi
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-

@@ -6,14 +6,13 @@ Plug 'airblade/vim-rooter'
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 
@@ -29,12 +28,11 @@ Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'ddollar/nerdcommenter'
+Plug 'preservim/nerdcommenter'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'matze/vim-move', "{{{
   let g:move_key_modifier = 'C'
 "}}}
-Plug 'kshenoy/vim-signature'
 
 " Rails/ruby
 Plug 'tpope/vim-rails', {'for': 'ruby'}
@@ -65,15 +63,11 @@ Plug 'nbardiuk/vim-iced-ncm2'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
         \  'cargo build --release'}
-" Only in Neovim:
-Plug 'radenling/vim-dispatch-neovim'
 
 Plug 'bronson/vim-trailing-whitespace'
 
 " Auto pair
 Plug 'cohama/lexima.vim'
-
-Plug 'JamshedVesuna/vim-markdown-preview'
 
 Plug 'vim-test/vim-test'
 " Handle all the languages, easily
@@ -144,8 +138,8 @@ set nofoldenable
 set foldmethod=syntax
 let g:clojure_fold = 1
 
-let g:python_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim2/bin/python"
-let g:python3_host_prog = "/Users/" . trim(system('whoami')) . "/.pyenv/versions/neovim3/bin/python"
+let g:loaded_python_provider = 0
+let g:python3_host_prog = "/usr/local/opt/python@3.9/bin/python3.9"
 
 " lightline config
 set noshowmode
