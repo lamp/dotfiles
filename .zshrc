@@ -82,8 +82,6 @@ fi
 
 alias be='bundle exec'
 
-eval "$(direnv hook zsh)"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias iced='~/.local/share/nvim/plugged/vim-iced/bin/iced'
@@ -104,4 +102,4 @@ if type chruby > /dev/null; then
   chruby 2.7.2
 fi
 
-if [ -e /Users/mattatron/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/mattatron/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
