@@ -45,6 +45,11 @@
   home.file.".gitignore".source = ../../.gitignore;
   home.file.".gitconfig".source = ../../.gitconfig;
   home.file.".ctags".source = ../../.ctags;
+  home.file.".config/nvim/init.vim".source = ../../nvim/init.vim;
+  home.file.".config/alacritty/alacritty.yml".source = ../../alacritty/alacritty.yml;
+  home.file.".lein/profiles.clj".source = ../../profiles.clj;
+  home.file.".shadow-cljs/config.edn".source = ../../shadow-cljs/config.edn;
+
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
