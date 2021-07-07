@@ -38,16 +38,10 @@ Plug 'matze/vim-move', "{{{
 Plug 'tpope/vim-rails', {'for': 'ruby'}
 
 " Autocompletion
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'ncm2/ncm2-vim-lsp'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
-Plug 'ncm2/ncm2-path'
-Plug 'fgrsnau/ncm2-otherbuf'
+Plug 'hrsh7th/nvim-compe'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
 
 " Clojure development
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
@@ -58,7 +52,7 @@ Plug 'liquidz/vim-iced-kaocha', {'for': 'clojure'}
 
 Plug 'liquidz/vim-iced-fern-debugger', {'for': 'clojure'}
 " Clojure Autocompletion
-Plug 'nbardiuk/vim-iced-ncm2'
+Plug 'tami5/vim-iced-compe'
 
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
@@ -163,10 +157,6 @@ let vim_markdown_preview_github=1
 " Iced vim default keybindings enable
 let g:iced_enable_default_key_mappings = v:true
 
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-
 " Use neovim strategy for testing
 let test#strategy = 'neovim'
 
@@ -174,38 +164,75 @@ let test#strategy = 'neovim'
 let g:lsp_signs_enabled = 1         " enable signs
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_highlight_references_enabled = 1
-" Rust
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-        \ 'allowlist': ['rust'],
-        \ })
-endif
-" Ruby
-if executable('solargraph')
-    " gem install solargraph
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
-        \ 'allowlist': ['ruby'],
-        \ })
-endif
 
-if executable('typescript-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'javascript support using typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
-        \ 'allowlist': ['javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescript.jsx'],
-        \ })
-endif
+" LSP setup
+lua <<EOF
+require'lspconfig'.clojure_lsp.setup{}
+require'lspconfig'.solargraph.setup{}
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.rls.setup{}
+EOF
 
-" clojure lsp config
-au User lsp_setup call lsp#register_server({
-      \ 'name': 'clojure-lsp',
-      \ 'cmd': {server_info->[&shell, &shellcmdflag, 'clojure-lsp']},
-      \ 'allowlist': ['clojure', 'clojurescript']
-      \ })
+" Autocomplete setup
+lua <<EOF
+-- Compe setup
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 3;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    nvim_lsp = true;
+    buffer = true;
+    calc = true;
+  }
+}
+
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
+
+-- Use (s-)tab to:
+--- move to prev/next item in completion menuone
+--- jump to prev/next snippet's placeholder
+_G.tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-n>"
+  elseif check_back_space() then
+    return t "<Tab>"
+  else
+    return vim.fn['compe#complete']()
+  end
+end
+_G.s_tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-p>"
+  else
+    return t "<S-Tab>"
+  end
+end
+
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+EOF
