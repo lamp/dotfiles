@@ -28,6 +28,7 @@
     python
     # General
     fzf
+    lazygit
     jq
     fd
     autojump
