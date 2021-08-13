@@ -78,8 +78,6 @@ if [ -f /usr/local/opt/qt@5.5/bin ]; then
   export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 fi
 
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
 alias be='bundle exec'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -90,10 +88,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
+# Git Shortcuts
+eval "$(scmpuff init -s)"
+
 # Rustup config
 source $HOME/.cargo/env
-
-[ -s "/Users/matt/.scm_breeze/scm_breeze.sh" ] && source "/Users/matt/.scm_breeze/scm_breeze.sh"
 
 # Shopify
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh

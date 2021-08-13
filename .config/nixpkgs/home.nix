@@ -34,6 +34,7 @@
     autojump
     ctags
     direnv
+    scmpuff
 
     pet
     zplug
