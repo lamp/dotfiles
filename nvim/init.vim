@@ -109,7 +109,7 @@ set splitright
 nnoremap <C-S> :FZF<CR>
 nnoremap <leader>g :Ag<CR>
 nnoremap <leader>k :Commands<CR>
-nnoremap <leader>e :Fern . -drawer -toggle -reveal=%<CR>
+nnoremap <leader>f :Fern . -drawer -toggle -reveal=%<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
