@@ -114,8 +114,6 @@ nnoremap <leader>f :Fern . -drawer -toggle -reveal=%<CR>
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 let g:rooter_patterns = ['.git/']
-let g:rooter_silent_chdir = 1
-let g:rooter_cd_cmd="lcd"
 
 let switchbuf='usetab'
 
