@@ -1,89 +1,94 @@
 # print all the things
 set -x
+curl -L https://nixos.org/nix/install | sh
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+home-manager switch
+
 # Install zplug
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-# Copy zsh config
-ln -sFv "$(pwd)/.zshrc" ~/.zshrc
+#curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+## Copy zsh config
+#ln -sFv "$(pwd)/.zshrc" ~/.zshrc
 
-# install zsh dependencies
-zplug install
+## install zsh dependencies
+#zplug install
 
-# Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# Install neovim
-brew install neovim
-# Copy neovim config file
-mkdir ~/.config/
-ln -sFv "$(pwd)/nvim/init.vim" ~/.config/nvim/init.vim
-# alacritty config
-mkdir  ~/.config/alacritty
-ln -sFv "$(pwd)/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
-ln -sFv "$(pwd)/.gitignore" ~/.gitignore
-ln -sFv "$(pwd)/.tmux.conf" ~/.tmux.conf
-ln -sFv "$(pwd)/.ctags" ~/.ctags
-ln -sFv "$(pwd)/.gitconfig" ~/.gitconfig
+## Install Homebrew
+#/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+## Install neovim
+#brew install neovim
+## Copy neovim config file
+#mkdir ~/.config/
+#ln -sFv "$(pwd)/nvim/init.vim" ~/.config/nvim/init.vim
+## alacritty config
+#mkdir  ~/.config/alacritty
+#ln -sFv "$(pwd)/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
+#ln -sFv "$(pwd)/.gitignore" ~/.gitignore
+#ln -sFv "$(pwd)/.tmux.conf" ~/.tmux.conf
+#ln -sFv "$(pwd)/.ctags" ~/.ctags
+#ln -sFv "$(pwd)/.gitconfig" ~/.gitconfig
 
-# Install vim-plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+## Install vim-plug
+#curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# install scm breeze
-git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
-~/.scm_breeze/install.sh
+## install scm breeze
+#git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
+#~/.scm_breeze/install.sh
 
-# Install rustup
-curl https://sh.rustup.rs -sSf | sh
+## Install rustup
+#curl https://sh.rustup.rs -sSf | sh
 
-# install leiningen
-brew install leiningen
-# Install clojure config
-ln -sFv "$(pwd)/shadow-cljs/config.edn" ~/.shadow-cljs/config.edn
-ln -sFv "$(pwd)/lein/profiles.clj" ~/.lein/profiles.clj
+## install leiningen
+#brew install leiningen
+## Install clojure config
+#ln -sFv "$(pwd)/shadow-cljs/config.edn" ~/.shadow-cljs/config.edn
+#ln -sFv "$(pwd)/lein/profiles.clj" ~/.lein/profiles.clj
 
-# Install joker
-brew install joker
-brew install clj-kondo
-# Scripting in clojure
-brew install borkdude/brew/babashka
-# misc
-brew install rbenv
-brew install ruby-build
-brew install fzf
-brew install fd
-brew install pyenv
-brew install pyenv-virtualenv
-brew install autojump
-brew install ctags
-brew install direnv
-brew install clojure-lsp/brew/clojure-lsp-native
+## Install joker
+#brew install joker
+#brew install clj-kondo
+## Scripting in clojure
+#brew install borkdude/brew/babashka
+## misc
+#brew install rbenv
+#brew install ruby-build
+#brew install fzf
+#brew install fd
+#brew install pyenv
+#brew install pyenv-virtualenv
+#brew install autojump
+#brew install ctags
+#brew install direnv
+#brew install clojure-lsp/brew/clojure-lsp-native
 
-ln -sFv "$(pwd).ctags" .ctags
+#ln -sFv "$(pwd).ctags" .ctags
 
-# ensure system ruby is a recent version
-rbenv install 2.7.1
-rbenv global 2.7.1
+## ensure system ruby is a recent version
+#rbenv install 2.7.1
+#rbenv global 2.7.1
 
-# ruby language server
-sudo gem install solargraph
-# install neovim dependencies
-nvim -s vim-commands.txt
+## ruby language server
+#sudo gem install solargraph
+## install neovim dependencies
+#nvim -s vim-commands.txt
 
 
-#  Python for neovim
-pyenv virtualenv 2.7.14 neovim2
-pyenv virtualenv 3.9.1 neovim3
+##  Python for neovim
+#pyenv virtualenv 2.7.14 neovim2
+#pyenv virtualenv 3.9.1 neovim3
 
-pyenv activate neovim2
-pip install pynvim
+#pyenv activate neovim2
+#pip install pynvim
 
-pyenv activate neovim3
-pip install pynvim
+#pyenv activate neovim3
+#pip install pynvim
 
-# install tmux and tpm
-brew install tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-gem install tmuxinator
-ln -sFv "$(pwd)/tmux.conf" ~/.tmux.conf
+## install tmux and tpm
+#brew install tmux
+#git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#gem install tmuxinator
+#ln -sFv "$(pwd)/tmux.conf" ~/.tmux.conf
 
-source ~/.zshrc
-# Finish
-print Done!
+#source ~/.zshrc
+## Finish
+#print Done!

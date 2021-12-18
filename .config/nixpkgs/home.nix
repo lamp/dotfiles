@@ -10,6 +10,7 @@
   home.homeDirectory = builtins.getEnv "HOME";
 
   home.packages = with pkgs; [
+    alacritty
     neovim
     tmux
 
@@ -18,10 +19,8 @@
     # joker
     clj-kondo
     leiningen
-    babashka-bin
-    babashka-bin
-    # clojure-lsp
-    solargraph
+    babashka
+    clojure-lsp
     # ruby
     rbenv
     # python/neovim
