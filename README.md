@@ -1,3 +1,3 @@
 # dotfiles
 
-run `sh ./install,sh` to install
+run `sh ./install.sh` to install
