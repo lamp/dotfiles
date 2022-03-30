@@ -2,9 +2,12 @@
 set -x
 mkdir ~/.config/
 ln -sFv "$(pwd)/.config/nixpkgs/home.nix" ~/.config/nixpkgs/home.nix
-curl -L https://nixos.org/nix/install | sh
+sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
+# this is not set by default
+export NIX_PATH=${NIX_PATH:+$NIX_PATH:}$HOME/.nix-defexpr/channels
+nix-shell '<home-manager>' -A install
 home-manager switch
 
 # Install zplug

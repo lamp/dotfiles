@@ -12,31 +12,35 @@
   home.packages = with pkgs; [
     alacritty
     neovim
+    # tmux
     tmux
 
     # Programming langues
     #clj
-    # joker
+    joker
     clj-kondo
     leiningen
     babashka
     clojure-lsp
+    # rust
+    cargo
     # ruby
-    rbenv
+    #rbenv
     # python/neovim
     python
+    vimPlugins.vim-plug
     # General
     fzf
     lazygit
     jq
     fd
+    silver-searcher
     autojump
+    zsh-z
     ctags
     direnv
     scmpuff
-
     pet
-    zplug
     wget
     tree
   ];
@@ -64,6 +68,18 @@
 
   programs.neovim = {
     withPython3 = true;
+  };
+
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    escapeTime = 0;
+    plugins = with pkgs; [
+      tmuxPlugins.sensible
+      tmuxPlugins.resurrect
+      tmuxPlugins.pain-control
+      tmuxPlugins.yank
+    ];
   };
 }
 

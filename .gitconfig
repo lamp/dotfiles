@@ -2,8 +2,8 @@
 	editor = nvim
 	excludesfile = ~/.gitignore
 [user]
-	name = lamp
-	email = matthew.gradidge@gmail.com
+	name = Matthew Gradidge
+	email = matt.gradidge@gmail.com
 [interactive]
 	singleKey = true
 [filter "lfs"]
@@ -11,3 +11,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[include]
+	path = /Users/matt/.config/dev/gitconfig

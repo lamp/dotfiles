@@ -33,7 +33,7 @@ fi
 
 export PATH="/usr/local/bin:$PATH"
 
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[[ -f ~/.nix-profile/etc/profile.d/autojump.sh ]] && . ~/.nix-profile/etc/profile.d/autojump.sh
 
 function reup() {
   source ~/.zshrc
@@ -65,18 +65,7 @@ export FZF_DEFAULT_COMMAND='fd -H --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTIONS='-m --cycle'
 # Always use homebrew openssl
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-
-# fc delete after 28/5/2021
-if [ -f /Users/matthew.gradidge/work/devtools/.source ]; then
-  source /Users/matthew.gradidge/work/devtools/.source
-fi
-
-# fundingcircle app, delete after 28/5/2021
-if [ -f /usr/local/opt/qt@5.5/bin ]; then
-  export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
-  export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
-fi
+#export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 alias be='bundle exec'
 
@@ -90,16 +79,16 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Rustup config
-source $HOME/.cargo/env
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
 # Shopify
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
-if type chruby > /dev/null; then
-  chruby 2.7.2
-fi
-
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# Nix
+[[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]] && . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+[[ -f /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]] &&. /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 
 # Git Shortcuts
 eval "$(scmpuff init -s)"
