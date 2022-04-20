@@ -27,6 +27,7 @@
     # ruby
     #rbenv
     # python/neovim
+    python39Packages.pynvim
     python
     vimPlugins.vim-plug
     # General
