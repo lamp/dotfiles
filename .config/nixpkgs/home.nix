@@ -47,7 +47,6 @@
     pet
     wget
     tree
-    ngrok
   ];
 
   home.file.".tmux.conf".source = ../../.tmux.conf;

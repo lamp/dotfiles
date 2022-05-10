@@ -1,8 +1,7 @@
-{:user {:plugins [[cider/cider-nrepl "0.21.1" :exclusions [org.clojure/tools.nrepl]]
-                  [refactor-nrepl "2.4.0" :exclusions [cider/cider-nrepl]]
-                  [lein-figwheel "0.5.18"]]
+{:user {:plugins [[cider/cider-nrepl "0.27.3"]
+                  [refactor-nrepl "3.5.2"]]
         :dependencies [[vvvvalvalval/scope-capture "0.2.0"]
-                       [nrepl "0.4.0"]
+                       [nrepl "0.9.0"]
                        [com.gfredericks/debug-repl "0.0.10"]
                        [com.cemerick/pomegranate "1.1.0" :exclusions [org.clojure/clojure
                                                                       org.apache.maven/maven-artifact
