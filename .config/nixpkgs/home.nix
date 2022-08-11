@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     alacritty
     neovim
+    vimPlugins.vim-plug
     # tmux
     tmux
 
@@ -41,6 +42,7 @@
     silver-searcher
     autojump
     zsh-z
+    zplug
     ctags
     direnv
     scmpuff
