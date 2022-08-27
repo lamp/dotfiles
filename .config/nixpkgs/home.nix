@@ -12,7 +12,6 @@
   home.packages = with pkgs; [
     alacritty
     neovim
-    vimPlugins.vim-plug
     # tmux
     tmux
 
@@ -31,7 +30,6 @@
     # python/neovim
     python39Packages.pynvim
     python
-    vimPlugins.vim-plug
     # node
     nodejs-16_x
     nodePackages.serverless
