@@ -20,7 +20,7 @@ Plug 'itchyny/lightline.vim',
 
 Plug 'simeji/winresizer'
 
-Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern.vim', { 'branch': 'main' }
 
 Plug 'unblevable/quick-scope'
 Plug 'mhinz/vim-startify'

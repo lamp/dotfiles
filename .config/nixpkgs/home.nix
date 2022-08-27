@@ -18,6 +18,7 @@
 
     # Programming langues
     #clj
+    clojure
     joker
     clj-kondo
     leiningen
