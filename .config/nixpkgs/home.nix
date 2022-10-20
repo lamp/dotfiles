@@ -10,6 +10,7 @@
   home.homeDirectory = builtins.getEnv "HOME";
 
   home.packages = with pkgs; [
+    git
     alacritty
     neovim
     # tmux

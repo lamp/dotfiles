@@ -205,7 +205,7 @@ local on_attach = function(client, bufnr)
 end
 
 local servers = { 'clojure_lsp', 'tsserver', 'rls', 'solargraph' }
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -224,6 +224,8 @@ EOF
 
 " Autocomplete setup
 set completeopt=menu,menuone,noselect
+
+
 lua <<EOF
 -- Setup nvim-cmp.
   local cmp = require'cmp'
