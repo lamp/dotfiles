@@ -33,6 +33,7 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'matze/vim-move', "{{{
   let g:move_key_modifier = 'C'
 "}}}
+Plug 'ggandor/leap.nvim'
 
 " Rails/ruby
 Plug 'tpope/vim-rails', {'for': 'ruby'}
@@ -257,3 +258,6 @@ lua <<EOF
     })
   })
 EOF
+
+" leam.nvim
+lua require('leap').add_default_mappings()

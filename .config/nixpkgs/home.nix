@@ -32,8 +32,8 @@
     python39Packages.pynvim
     python
     # node
-    nodejs-16_x
-    nodePackages.serverless
+    # nodejs-16_x
+    # nodePackages.serverless
     # General
     fzf
     lazygit
