@@ -14,9 +14,12 @@ Plug 'tpope/vim-rhubarb'
 
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'rebelot/kanagawa.nvim'
 
-Plug 'itchyny/lightline.vim',
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'simeji/winresizer'
 
@@ -104,9 +107,7 @@ if (has("termguicolors"))
 endif
 set background=dark
 
-let g:material_theme_style = 'ocean'
-
-colorscheme material
+colorscheme kanagawa
 
 set hidden
 set number
@@ -141,20 +142,11 @@ let g:clojure_fold = 1
 let g:loaded_python_provider = 0
 "let g:python3_host_prog = "/usr/local/opt/python@3.9/bin/python3.9"
 
-" lightline config
-set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'material_vim',
-      \ 'active': {
-      \   'left': [ [ 'mode' ],
-      \             [ 'gitbranch', 'filename', 'modified' ] ],
-      \   'right': [['percent', 'lineinfo'],
-      \             ['filetype']]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
+" lualine config
+
+lua <<EOF
+require('lualine').setup()
+EOF
 
 " Markdown preview configuration
 let vim_markdown_preview_temp_file=1
@@ -257,7 +249,38 @@ lua <<EOF
       { name = 'ultisnips'},
     })
   })
+
+require('leap').add_default_mappings()
+
+
+require('nvim-treesitter.configs').setup ({
+-- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  -- List of parsers to ignore installing (for "all")
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+})
 EOF
 
-" leam.nvim
-lua require('leap').add_default_mappings()

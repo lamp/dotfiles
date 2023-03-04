@@ -33,6 +33,7 @@
     python
     # node
     # nodejs-16_x
+    tree-sitter
     # nodePackages.serverless
     # General
     fzf
