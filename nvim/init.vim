@@ -28,8 +28,8 @@ Plug 'lambdalisue/fern.vim', { 'branch': 'main' }
 Plug 'unblevable/quick-scope'
 Plug 'mhinz/vim-startify'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 
 Plug 'preservim/nerdcommenter'
 Plug 'jeetsukumaran/vim-buffergator'
@@ -96,11 +96,17 @@ Plug 'elmcast/elm-vim'
 
 call plug#end()
 
-set rtp+=/usr/local/bin/fzf
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <C-S> <cmd>Telescope git_files<cr>
 
-let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.4 }}
-let g:fzf_preview_window = ['right:30%']
+
+lua << EOF
+require('telescope').setup{
+}
+EOF
 
 if (has("termguicolors"))
   set termguicolors
@@ -115,9 +121,6 @@ set nowrap
 set splitright
 
 " FZF mappings
-nnoremap <C-S> :FZF<CR>
-nnoremap <leader>g :Ag<CR>
-nnoremap <leader>k :Commands<CR>
 nnoremap <leader>f :Fern . -drawer -toggle -reveal=%<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
