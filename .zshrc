@@ -92,3 +92,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # Git Shortcuts
 eval "$(scmpuff init -s)"
+# start direnv
+eval "$(direnv hook zsh)"
