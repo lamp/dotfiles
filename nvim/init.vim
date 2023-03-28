@@ -57,6 +57,8 @@ Plug 'lamp/cmp-iced'
 
 " Clojure development
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
+" required for iced
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-project-namespaces', {'for': 'clojure', 'on': 'IcedBrowseNamespace'}
 Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunction'}

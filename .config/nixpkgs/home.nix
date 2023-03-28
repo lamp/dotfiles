@@ -37,6 +37,7 @@
     # nodePackages.serverless
     # General
     fzf
+    ripgrep
     lazygit
     jq
     fd
