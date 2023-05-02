@@ -96,6 +96,9 @@ endif
 " Elm
 Plug 'elmcast/elm-vim'
 
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+
 call plug#end()
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -123,8 +126,8 @@ set number
 set nowrap
 set splitright
 
-" FZF mappings
-nnoremap <leader>f :Fern . -drawer -toggle -reveal=%<CR>
+"fern
+nnoremap <leader>fe :Fern . -drawer -toggle -reveal=%<CR>
 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
@@ -207,6 +210,9 @@ let test#strategy = 'neovim'
 let g:lsp_signs_enabled = 1         " enable signs
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_highlight_references_enabled = 1
+
+"ensure ranger replaces netrw
+let g:ranger_replace_netrw = 1
 
 " LSP setup
 lua <<EOF
