@@ -51,6 +51,7 @@
     pet
     wget
     tree
+    ranger
   ];
 
   home.file.".tmux.conf".source = ../../.tmux.conf;
