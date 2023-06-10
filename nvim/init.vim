@@ -169,15 +169,12 @@ set ttyfast
 set nocursorline
 set nocursorcolumn
 
-set nofoldenable
-
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
-let g:clojure_fold = 1
+set nofoldenable
 
 let g:loaded_python_provider = 0
-"let g:python3_host_prog = "/usr/local/opt/python@3.9/bin/python3.9"
 
 " lualine config
 
