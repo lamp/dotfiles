@@ -170,7 +170,10 @@ set nocursorline
 set nocursorcolumn
 
 set nofoldenable
-set foldmethod=syntax
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 let g:clojure_fold = 1
 
 let g:loaded_python_provider = 0
