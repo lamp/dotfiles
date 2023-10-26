@@ -52,6 +52,7 @@
     wget
     tree
     ranger
+    deno
   ];
 
   home.file.".tmux.conf".source = ../../.tmux.conf;

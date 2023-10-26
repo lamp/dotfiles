@@ -26,6 +26,7 @@ Plug 'lambdalisue/fern.vim', { 'branch': 'main' }
 
 Plug 'unblevable/quick-scope'
 Plug 'mhinz/vim-startify'
+Plug 'karb94/neoscroll.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
@@ -95,7 +96,6 @@ endif
 " Elm
 Plug 'elmcast/elm-vim'
 
-Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
 Plug 'nvim-neorg/neorg'
@@ -103,12 +103,15 @@ Plug 'nvim-lua/plenary.nvim'
 
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 
 call plug#end()
 
 lua << EOF
   require("trouble").setup { }
 EOF
+lua require('neoscroll').setup()
 
 lua << EOF
 require('neorg').setup {
@@ -133,6 +136,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
 nnoremap <C-S> <cmd>Telescope git_files<cr>
 
+nnoremap <leader>f <cmd>Neotree<cr>
 
 lua << EOF
 require('telescope').setup{
@@ -236,8 +240,6 @@ let g:lsp_signs_enabled = 1         " enable signs
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_highlight_references_enabled = 1
 
-"ensure ranger replaces netrw
-let g:ranger_replace_netrw = 1
 
 " LSP setup
 lua <<EOF
