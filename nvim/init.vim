@@ -29,7 +29,7 @@ Plug 'mhinz/vim-startify'
 Plug 'karb94/neoscroll.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
 Plug 'preservim/nerdcommenter'
 Plug 'jeetsukumaran/vim-buffergator'
