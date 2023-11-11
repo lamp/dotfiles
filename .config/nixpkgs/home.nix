@@ -29,8 +29,7 @@
     # ruby
     #rbenv
     # python/neovim
-    python39Packages.pynvim
-    python
+    python311Packages.pynvim
     # node
     # nodejs-16_x
     tree-sitter
@@ -53,6 +52,7 @@
     tree
     ranger
     deno
+    xh
   ];
 
   home.file.".tmux.conf".source = ../../.tmux.conf;
