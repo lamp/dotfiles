@@ -117,11 +117,14 @@ lua << EOF
 require('neorg').setup {
     load = {
         ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.completion"] = {config = { engine = "nvim-cmp" }}, -- allows for autocompletion
+        ["core.summary"] = {config = { strategy = "default" }}, -- generates summaries
         ["core.concealer"] = {}, -- Adds pretty icons to your documents
         ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
                 workspaces = {
                     notes = "~/notes",
+                    work = "~/work",
                 },
             },
         },
