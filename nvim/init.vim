@@ -139,7 +139,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
 nnoremap <C-S> <cmd>Telescope git_files<cr>
 
-nnoremap <leader>f <cmd>Neotree<cr>
+nnoremap <leader>f <cmd>Neotree reveal_file=%<cr>
 
 lua << EOF
 require('telescope').setup{
