@@ -36,10 +36,6 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'matze/vim-move', "{{{
   let g:move_key_modifier = 'C'
 "}}}
-Plug 'ggandor/leap.nvim'
-
-" Rails/ruby
-Plug 'tpope/vim-rails', {'for': 'ruby'}
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -76,7 +72,6 @@ Plug 'bronson/vim-trailing-whitespace'
 " Auto pair
 Plug 'cohama/lexima.vim'
 
-Plug 'vim-test/vim-test'
 " Handle all the languages, easily
 Plug 'sheerun/vim-polyglot', "{{{
   let g:polyglot_disabled = ['elm']
@@ -96,8 +91,6 @@ endif
 " Elm
 Plug 'elmcast/elm-vim'
 
-Plug 'rbgrouleff/bclose.vim'
-
 Plug 'nvim-neorg/neorg'
 Plug 'nvim-lua/plenary.nvim'
 
@@ -106,14 +99,25 @@ Plug 'folke/trouble.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 
+Plug 'mrquantumcodes/bufferchad.nvim'
+Plug 'folke/noice.nvim'
+
 call plug#end()
 
 lua << EOF
-  require("trouble").setup { }
-EOF
-lua require('neoscroll').setup()
 
-lua << EOF
+require("noice").setup({})
+require("trouble").setup { }
+require('neoscroll').setup()
+
+require("bufferchad").setup({
+  mapping = "<leader>bb", -- Map any key, or set to NONE to disable key mapping
+  mark_mapping = "<leader>bm", -- The keybinding to display just the marked buffers
+  order = "LAST_USED_UP", -- LAST_USED_UP (default)/ASCENDING/DESCENDING/REGULAR
+  style = "default", -- default, modern (requires dressing.nvim and nui.nvim), telescope (requires telescope.nvim)
+  close_mapping = "<Esc><Esc>", -- only for the default style window. 
+})
+
 require('neorg').setup {
     load = {
         ["core.defaults"] = {}, -- Loads default behaviour
@@ -130,62 +134,12 @@ require('neorg').setup {
         },
     },
 }
-EOF
 
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fc <cmd>Telescope commands<cr>
-nnoremap <C-S> <cmd>Telescope git_files<cr>
-
-nnoremap <leader>f <cmd>Neotree reveal_file=%<cr>
-
-lua << EOF
 require('telescope').setup{
 }
-EOF
 
-if (has("termguicolors"))
-  set termguicolors
-endif
-set background=dark
+-- // lualine config
 
-colorscheme kanagawa
-
-set hidden
-set number
-set nowrap
-set splitright
-
-"fern
-nnoremap <leader>fe :Fern . -drawer -toggle -reveal=%<CR>
-
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-
-let g:rooter_patterns = ['.git/']
-
-let switchbuf='usetab'
-
-set lazyredraw
-set synmaxcol=256
-syntax sync minlines=30
-set relativenumber
-" set re=1
-set ttyfast
-set nocursorline
-set nocursorcolumn
-
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
-set nofoldenable
-
-let g:loaded_python_provider = 0
-
-" lualine config
-
-lua <<EOF
 require('lualine').setup({
   options = {
     icons_enabled = true,
@@ -226,26 +180,8 @@ require('lualine').setup({
   inactive_winbar = {},
   extensions = {}
 })
-EOF
 
-" Markdown preview configuration
-let vim_markdown_preview_temp_file=1
-let vim_markdown_preview_github=1
-
-" Iced vim default keybindings enable
-let g:iced_enable_default_key_mappings = v:true
-
-" Use neovim strategy for testing
-let test#strategy = 'neovim'
-
-" LSP config
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_highlight_references_enabled = 1
-
-
-" LSP setup
-lua <<EOF
+-- LSP  setup
 local nvim_lsp = require('lspconfig')
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -294,45 +230,36 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
-EOF
 
-" Autocomplete setup
-set completeopt=menu,menuone,noselect
-
-
-lua <<EOF
 -- Setup nvim-cmp.
-  local cmp = require'cmp'
+local cmp = require'cmp'
 
-  cmp.setup({
-    snippet = {
-        expand = function(args)
-          vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        end,
-      },
-    mapping = {
-      ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
-      ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
-      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- If you want to remove the default `<C-y>` mapping, You can specify `cmp.config.disable` value.
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'iced' },
-      { name = 'buffer' },
-      { name = 'ultisnips'},
-    })
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  mapping = {
+    ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+    ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable, -- If you want to remove the default `<C-y>` mapping, You can specify `cmp.config.disable` value.
+    ['<C-e>'] = cmp.mapping({
+    i = cmp.mapping.abort(),
+    c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'iced' },
+    { name = 'buffer' },
+    { name = 'ultisnips'},
   })
-
-require('leap').add_default_mappings()
-
+})
 
 require('nvim-treesitter.configs').setup ({
 -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -363,5 +290,71 @@ require('nvim-treesitter.configs').setup ({
     additional_vim_regex_highlighting = false,
   },
 })
+
 EOF
 
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fc <cmd>Telescope commands<cr>
+nnoremap <C-S> <cmd>Telescope git_files<cr>
+
+nnoremap <leader>f <cmd>Neotree reveal_file=%<cr>
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+set background=dark
+
+colorscheme kanagawa
+
+set hidden
+set number
+set nowrap
+set splitright
+
+"fern
+nnoremap <leader>fe :Fern . -drawer -toggle -reveal=%<CR>
+
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+let g:rooter_patterns = ['.git/']
+
+let switchbuf='usetab'
+
+set lazyredraw
+set synmaxcol=256
+syntax sync minlines=30
+set relativenumber
+" set re=1
+set ttyfast
+set nocursorline
+set nocursorcolumn
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+set nofoldenable
+
+let g:loaded_python_provider = 0
+
+
+" Markdown preview configuration
+let vim_markdown_preview_temp_file=1
+let vim_markdown_preview_github=1
+
+" Iced vim default keybindings enable
+let g:iced_enable_default_key_mappings = v:true
+
+" Use neovim strategy for testing
+let test#strategy = 'neovim'
+
+" LSP config
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_highlight_references_enabled = 1
+
+
+" Autocomplete setup
+set completeopt=menu,menuone,noselect
