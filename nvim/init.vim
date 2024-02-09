@@ -121,6 +121,8 @@ require("bufferchad").setup({
 require('neorg').setup {
     load = {
         ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.export"] = {},
+        ["core.export.markdown"] = {},
         ["core.completion"] = {config = { engine = "nvim-cmp" }}, -- allows for autocompletion
         ["core.summary"] = {config = { strategy = "default" }}, -- generates summaries
         ["core.concealer"] = {}, -- Adds pretty icons to your documents
