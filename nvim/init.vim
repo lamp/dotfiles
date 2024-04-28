@@ -25,8 +25,8 @@ Plug 'simeji/winresizer'
 Plug 'lambdalisue/fern.vim', { 'branch': 'main' }
 
 Plug 'unblevable/quick-scope'
-Plug 'mhinz/vim-startify'
 Plug 'karb94/neoscroll.nvim'
+Plug 'startup-nvim/startup.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
@@ -105,6 +105,8 @@ Plug 'folke/noice.nvim'
 call plug#end()
 
 lua << EOF
+
+require("startup").setup({theme = "dashboard"})
 
 require("noice").setup({
   lsp = {
