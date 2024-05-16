@@ -9,7 +9,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -61,7 +60,6 @@ Plug 'liquidz/vim-iced-function-list', {'for': 'clojure', 'on': 'IcedBrowseFunct
 Plug 'liquidz/vim-iced-kaocha', {'for': 'clojure'}
 
 Plug 'liquidz/vim-iced-fern-debugger', {'for': 'clojure'}
-" Clojure Autocompletion
 
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'eraserhd/parinfer-rust', {'do':
@@ -73,9 +71,9 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'cohama/lexima.vim'
 
 " Handle all the languages, easily
-Plug 'sheerun/vim-polyglot', "{{{
-  let g:polyglot_disabled = ['elm']
-"}}}
+"Plug 'sheerun/vim-polyglot', "{{{
+  "let g:polyglot_disabled = ['elm']
+""}}}
 "
 " Tags plugin
 if executable('ctags')
