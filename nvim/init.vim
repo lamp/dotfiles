@@ -9,8 +9,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 
-Plug 'tpope/vim-rhubarb'
-
+Plug 'airblade/vim-gitgutter'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 Plug 'rebelot/kanagawa.nvim'
