@@ -88,7 +88,6 @@ endif
 " Elm
 Plug 'elmcast/elm-vim'
 
-Plug 'nvim-neorg/neorg'
 Plug 'nvim-lua/plenary.nvim'
 
 Plug 'nvim-tree/nvim-web-devicons'
@@ -134,24 +133,24 @@ require("bufferchad").setup({
   close_mapping = "<Esc><Esc>", -- only for the default style window. 
 })
 
-require('neorg').setup {
-    load = {
-        ["core.defaults"] = {}, -- Loads default behaviour
-        ["core.export"] = {},
-        ["core.export.markdown"] = {},
-        ["core.completion"] = {config = { engine = "nvim-cmp" }}, -- allows for autocompletion
-        ["core.summary"] = {config = { strategy = "default" }}, -- generates summaries
-        ["core.concealer"] = {}, -- Adds pretty icons to your documents
-        ["core.dirman"] = { -- Manages Neorg workspaces
-            config = {
-                workspaces = {
-                    notes = "~/notes",
-                    work = "~/work",
-                },
-            },
-        },
-    },
-}
+-- require('neorg').setup {
+--     load = {
+--         ["core.defaults"] = {}, -- Loads default behaviour
+--         ["core.export"] = {},
+--         ["core.export.markdown"] = {},
+--         ["core.completion"] = {config = { engine = "nvim-cmp" }}, -- allows for autocompletion
+--         ["core.summary"] = {config = { strategy = "default" }}, -- generates summaries
+--         ["core.concealer"] = {}, -- Adds pretty icons to your documents
+--         ["core.dirman"] = { -- Manages Neorg workspaces
+--             config = {
+--                 workspaces = {
+--                     notes = "~/notes",
+--                     work = "~/work",
+--                 },
+--             },
+--         },
+--     },
+-- }
 
 require('telescope').setup{
 }
