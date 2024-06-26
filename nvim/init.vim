@@ -29,7 +29,8 @@ Plug 'startup-nvim/startup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
-Plug 'preservim/nerdcommenter'
+"Plug 'preservim/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'matze/vim-move', "{{{
   let g:move_key_modifier = 'C'
@@ -101,7 +102,7 @@ Plug 'folke/noice.nvim'
 call plug#end()
 
 lua << EOF
-
+require('Comment').setup()
 require("startup").setup({theme = "dashboard"})
 
 require("noice").setup({
