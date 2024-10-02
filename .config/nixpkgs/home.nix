@@ -51,7 +51,6 @@
     wget
     tree
     ranger
-    deno
     xh
     bun
   ];
