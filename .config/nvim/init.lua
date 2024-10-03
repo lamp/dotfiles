@@ -68,7 +68,8 @@ require('pckr').add{
   'nvim-neo-tree/neo-tree.nvim';
   'mrquantumcodes/bufferchad.nvim';
   'folke/noice.nvim';
-  }
+	'gcmt/vessel.nvim';
+}
 
 require('Comment').setup()
 require("startup").setup({theme = "dashboard"})
@@ -298,6 +299,10 @@ require('nvim-treesitter.configs').setup ({
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
+})
+
+require("vessel").setup({
+  create_commands = true
 })
 
 vim.keymap.set('n', '<leader>fe', ':Fern . -drawer -toggle -reveal=%<cr>')
