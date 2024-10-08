@@ -52,10 +52,11 @@ require('pckr').add{
   'guns/vim-sexp';
   'junegunn/fzf';
   'liquidz/vim-iced';
-  'liquidz/vim-iced-project-namespaces';
+  -- 'liquidz/vim-iced-project-namespaces';
   'liquidz/vim-iced-function-list', -- {'for': 'clojure', 'on': 'IcedBrowseFunction'};
-  'liquidz/vim-iced-kaocha';
-  'liquidz/vim-iced-fern-debugger';
+				-- TODO: re-enable
+  -- 'liquidz/vim-iced-kaocha';
+  -- 'liquidz/vim-iced-fern-debugger';
   'tpope/vim-sexp-mappings-for-regular-people';
   {'eraserhd/parinfer-rust', run = 'nix-shell --run \"cargo build --release \"'}; -- 'cargo build --release' };
   'bronson/vim-trailing-whitespace';
@@ -341,8 +342,13 @@ vim.o.cursorcolumn = false
 vim.o.foldmethod = "expr"
 vim.o.foldexpr= "nvim_treesitter#foldexpr()"
 vim.o.foldenable = false
+vim.o.filetype = 'on'
+vim.o.indent = 'on'
+vim.o.plugin = 'on'
+vim.o.syntax = 'on'
 
 vim.o.lazyredraw = true
 
 vim.g.iced_enable_default_key_mappings  = true
 vim.g.loaded_python_provider = 0
+vim.g.rooter_patterns = {'.git' }
