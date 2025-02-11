@@ -343,8 +343,6 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr= "nvim_treesitter#foldexpr()"
 vim.o.foldenable = false
 vim.o.filetype = 'on'
-vim.o.indent = 'on'
-vim.o.plugin = 'on'
 vim.o.syntax = 'on'
 
 vim.o.lazyredraw = true

@@ -13,7 +13,6 @@
     git
     alacritty
     neovim
-    # tmux
     tmux
 
     # Programming langues
@@ -80,17 +79,17 @@
     withPython3 = true;
   };
 
-  programs.tmux = {
-    enable = true;
-    clock24 = true;
-    escapeTime = 0;
-    plugins = with pkgs; [
-      tmuxPlugins.sensible
-      tmuxPlugins.resurrect
-      tmuxPlugins.pain-control
-      tmuxPlugins.yank
-    ];
-  };
+  # programs.tmux = {
+  #   enable = true;
+  #   clock24 = true;
+  #   escapeTime = 0;
+  #   plugins = with pkgs; [
+  #     tmuxPlugins.sensible
+  #     tmuxPlugins.resurrect
+  #     tmuxPlugins.pain-control
+  #     tmuxPlugins.yank
+  #   ];
+  # };
   nixpkgs.config.permittedInsecurePackages = [
     "python-2.7.18.6"
   ];
