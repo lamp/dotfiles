@@ -56,6 +56,7 @@
 
     podman
     podman-compose
+		asdf-vm
   ];
 
   home.file.".tmux.conf".source = ../../.tmux.conf;
