@@ -305,6 +305,7 @@ require('nvim-treesitter.configs').setup ({
 require("vessel").setup({
   create_commands = true
 })
+vim.keymap.set('n', '<C-E>', ':WinResizerStartResize<cr>')
 
 vim.keymap.set('n', '<leader>fe', ':Fern . -drawer -toggle -reveal=%<cr>')
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<cr>')

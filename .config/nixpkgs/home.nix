@@ -52,6 +52,10 @@
     ranger
     xh
     bun
+    scaleway-cli
+
+    podman
+    podman-compose
   ];
 
   home.file.".tmux.conf".source = ../../.tmux.conf;
