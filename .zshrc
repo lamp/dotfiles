@@ -90,6 +90,9 @@ export NVM_DIR="$HOME/.nvm"
 [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]] && . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]] &&. /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 
+# Asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # Git Shortcuts
 eval "$(scmpuff init -s)"
 # start direnv
