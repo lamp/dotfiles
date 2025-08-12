@@ -1,4 +1,5 @@
 source ~/.zplug/init.zsh
+zstyle ':omz:alpha:lib:git' async-prompt no
 zplug "plugins/git",   from:oh-my-zsh, defer:2
 zplug "plugins/brew",   from:oh-my-zsh, defer:2
 zplug "plugins/lein",   from:oh-my-zsh, defer:2

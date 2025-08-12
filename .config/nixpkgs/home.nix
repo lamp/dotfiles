@@ -23,6 +23,8 @@
     leiningen
     babashka
     clojure-lsp
+    # LSP
+    typescript-language-server
     # rust
     cargo
     # ruby
