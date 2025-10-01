@@ -29,7 +29,7 @@ require('pckr').add{
   'airblade/vim-gitgutter';
   {'mg979/vim-visual-multi', branch = 'master' };
   'rebelot/kanagawa.nvim';
-  {'nvim-treesitter/nvim-treesitter', run  = ':TSUpdate'};
+  {'nvim-treesitter/nvim-treesitter', run  = ':TSUpdate', branch = 'main' };
   'nvim-lualine/lualine.nvim';
   'simeji/winresizer';
   {'lambdalisue/fern.vim', branch  = 'main' };
@@ -68,6 +68,7 @@ require('pckr').add{
   'MunifTanjim/nui.nvim';
   'nvim-neo-tree/neo-tree.nvim';
   'mrquantumcodes/bufferchad.nvim';
+  'rcarriga/nvim-notify';
   'folke/noice.nvim';
 	'gcmt/vessel.nvim';
 }
@@ -75,24 +76,7 @@ require('pckr').add{
 require('Comment').setup()
 require("startup").setup({theme = "dashboard"})
 
-require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = false, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
-})
+
 require("trouble").setup { }
 require('neoscroll').setup()
 
@@ -253,7 +237,7 @@ cmp.setup({
   })
 })
 
-require('nvim-treesitter.configs').setup ({
+require('nvim-treesitter').setup ({
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
 
@@ -301,6 +285,25 @@ require('nvim-treesitter.configs').setup ({
 	},
 })
 
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = false, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+})
+
 require("vessel").setup({
   create_commands = true
 })
@@ -312,7 +315,7 @@ vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<cr>')
 vim.keymap.set('n', '<leader>fb', ':Telescope buffers<cr>')
 vim.keymap.set('n', '<leader>fh', ':Telescope help_tags<cr>')
 vim.keymap.set('n', '<leader>fc', ':Telescope commands<cr>')
-vim.keymap.set('n', '<leader>f', ':Neotree reveal_file=%<cr>')
+vim.keymap.set('n', '<leader>f', ':Neotree reveal<cr>')
 vim.keymap.set('n', '<C-S>', ':Telescope git_files<cr>')
 -- nnoremap <leader>fe :Fern . -drawer -toggle -reveal=%<CR>
 -- nnoremap <leader>ff <cmd>Telescope find_files<cr>
