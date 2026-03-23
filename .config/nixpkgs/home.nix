@@ -10,10 +10,20 @@
   home.homeDirectory = builtins.getEnv "HOME";
 
   home.packages = with pkgs; [
+    gemini-cli
+    openssl
     git
     alacritty
     neovim
     tmux
+    # Postgres
+    postgresql
+    postgresql.pg_config
+    libpq
+    freetds
+    devcontainer
+
+    pkg-config
 
     # Programming langues
     #clj
@@ -28,17 +38,21 @@
     # rust
     cargo
     # ruby
-    #rbenv
+    rbenv
     # python/neovim
-    python311Packages.pynvim
+    python313
+    python313Packages.pynvim
     # node
     # nodejs-16_x
     tree-sitter
     # nodePackages.serverless
+    # gleam, static language for the erlang vm
+    gleam
     # General
     fzf
     ripgrep
     lazygit
+    htop
     jq
     fd
     silver-searcher
@@ -100,5 +114,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     "python-2.7.18.6"
   ];
+
 }
 

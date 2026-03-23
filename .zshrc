@@ -44,10 +44,6 @@ function reup() {
 export PATH="$PATH:/usr/local/Cellar/postgresql@9.6/9.6.8/bin/"
 export PATH="$PATH:/Users/matthew.gradidge/confluent/bin"
 
-# RBenv init
-if [[ -f /usr/local/bin/rbenv ]]; then
-  eval "$(rbenv init -)"
-fi
 
 # Disable shared history between tabs and panes
 unsetopt inc_append_history
@@ -70,14 +66,10 @@ export FZF_DEFAULT_OPTIONS='-m --cycle'
 
 alias be='bundle exec'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# source <(fzf --zsh)
 
 alias iced='~/.local/share/nvim/plugged/vim-iced/bin/iced'
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
-
 
 # Rustup config
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
@@ -94,7 +86,14 @@ export NVM_DIR="$HOME/.nvm"
 # Asdf
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
+# RBenv init
+eval "$(rbenv init -)"
+
 # Git Shortcuts
 eval "$(scmpuff init -s)"
 # start direnv
 eval "$(direnv hook zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

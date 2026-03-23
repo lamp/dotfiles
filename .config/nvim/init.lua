@@ -37,7 +37,7 @@ require('pckr').add{
   'karb94/neoscroll.nvim';
   'startup-nvim/startup.nvim';
   'nvim-lua/plenary.nvim';
-  {'nvim-telescope/telescope.nvim', tag = '0.1.8' };
+  {'nvim-telescope/telescope.nvim', tag = 'v0.2.0' };
   'numToStr/Comment.nvim';
   'jeetsukumaran/vim-buffergator';
   'neovim/nvim-lspconfig';
@@ -46,8 +46,8 @@ require('pckr').add{
   'hrsh7th/cmp-path';
   'hrsh7th/cmp-cmdline';
   'hrsh7th/nvim-cmp';
-  'SirVer/ultisnips';
-  'quangnguyen30192/cmp-nvim-ultisnips';
+  -- 'SirVer/ultisnips';
+  -- 'quangnguyen30192/cmp-nvim-ultisnips';
   {'lamp/cmp-iced', requires = {'hrsh7th/nvim-cmp'}};
   'guns/vim-sexp';
   'junegunn/fzf';
@@ -71,10 +71,21 @@ require('pckr').add{
   'rcarriga/nvim-notify';
   'folke/noice.nvim';
 	'gcmt/vessel.nvim';
+	'github/copilot.vim';
+  'esensar/nvim-dev-container';
 }
 
 require('Comment').setup()
 require("startup").setup({theme = "dashboard"})
+require("devcontainer").setup({
+  container_runtime = "docker",
+})
+
+if vim.fn.executable('node') == 0 then
+  vim.schedule(function()
+    vim.notify("Node.js not found in PATH. github/copilot.vim requires Node (>=16). Install Node or add it to PATH.", vim.log.levels.WARN)
+  end)
+end
 
 
 require("trouble").setup { }
@@ -191,7 +202,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local servers = { 'clojure_lsp', 'typescript-language-server', 'rls', 'solargraph' }
+local servers = { 'clojure_lsp', 'typescript-language-server', 'rls', 'ruby-lsp' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
@@ -206,16 +217,24 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+nvim_lsp.tsserver.setup{}
+
+nvim_lsp.ruby_lsp.setup({
+  init_options = {
+    formatter = 'standard',
+    linters = { 'standard' },
+  },
+})
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-    end,
-  },
+  -- snippet = {
+  --   expand = function(args)
+    -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+  --   end,
+  -- },
   mapping = {
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
@@ -331,7 +350,10 @@ vim.cmd("colorscheme kanagawa")
 vim.o.termguicolors = true
 vim.opt.completeopt = {menu,menuone,noselect}
 
-vim.o.tabstop = 2
+vim.o.expandtab = true
+vim.o.tabstop = 2 
+vim.o.shiftwidth = 2 
+
 vim.o.hidden = true
 vim.o.background = "dark"
 vim.o.number = true
