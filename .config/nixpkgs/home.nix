@@ -48,6 +48,8 @@
     # nodePackages.serverless
     # gleam, static language for the erlang vm
     gleam
+    erlang
+    beam28Packages.rebar3
     # General
     fzf
     ripgrep
@@ -81,6 +83,8 @@
   home.file.".gitconfig".source = ../../.gitconfig;
   home.file.".ctags".source = ../../.ctags;
   home.file.".config/nvim/init.lua".source = ../nvim/init.lua;
+  # TODO: enable this when I move to nvim default lsp config
+  # home.file.".config/nvim/lsp/".source = ../nvim/lsp/;
   home.file.".config/alacritty/alacritty.yml".source = ../../alacritty/alacritty.yml;
   home.file.".lein/profiles.clj".source = ../../profiles.clj;
   home.file.".shadow-cljs/config.edn".source = ../../shadow-cljs/config.edn;

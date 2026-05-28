@@ -202,39 +202,35 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local servers = { 'clojure_lsp', 'typescript-language-server', 'rls', 'ruby-lsp' }
-local capabilities = require('cmp_nvim_lsp').default_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
-nvim_lsp.tsserver.setup{}
-
-nvim_lsp.ruby_lsp.setup({
-  init_options = {
-    formatter = 'standard',
-    linters = { 'standard' },
-  },
-})
+vim.lsp.enable({'clojure', 'ts_ls', 'ruby'})
+-- local servers = { 'clojure_lsp', 'typescript-language-server', 'rls', 'ruby-lsp' }
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities(
+--   vim.lsp.protocol.make_client_capabilities()
+-- )
+-- -- Use a loop to conveniently call 'setup' on multiple servers and
+-- -- map buffer local keybindings when the language server attaches
+-- for _, lsp in ipairs(servers) do
+--   nvim_lsp[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     flags = {
+--       debounce_text_changes = 150,
+--     }
+--   }
+-- end
+-- nvim_lsp.tsserver.setup{}
+--
+-- nvim_lsp.ruby_lsp.setup({
+--   init_options = {
+--     formatter = 'standard',
+--     linters = { 'standard' },
+--   },
+-- })
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 
 cmp.setup({
-  -- snippet = {
-  --   expand = function(args)
-    -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-  --   end,
-  -- },
   mapping = {
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
@@ -336,19 +332,12 @@ vim.keymap.set('n', '<leader>fh', ':Telescope help_tags<cr>')
 vim.keymap.set('n', '<leader>fc', ':Telescope commands<cr>')
 vim.keymap.set('n', '<leader>f', ':Neotree reveal<cr>')
 vim.keymap.set('n', '<C-S>', ':Telescope git_files<cr>')
--- nnoremap <leader>fe :Fern . -drawer -toggle -reveal=%<CR>
--- nnoremap <leader>ff <cmd>Telescope find_files<cr>
--- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
--- nnoremap <leader>fb <cmd>Telescope buffers<cr>
--- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
--- nnoremap <leader>fc <cmd>Telescope commands<cr>
--- nnoremap <C-S> <cmd>Telescope git_files<cr>
--- nnoremap <leader>f <cmd>Neotree reveal_file=%<cr>
 
 vim.cmd("colorscheme kanagawa")
 
 vim.o.termguicolors = true
 vim.opt.completeopt = {menu,menuone,noselect}
+vim.opt.winborder = 'rounded'
 
 vim.o.expandtab = true
 vim.o.tabstop = 2 
