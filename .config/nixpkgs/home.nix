@@ -57,7 +57,6 @@
     htop
     jq
     fd
-    silver-searcher
     autojump
     zsh-z
     zplug

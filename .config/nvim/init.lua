@@ -36,7 +36,6 @@ require('pckr').add{
   'unblevable/quick-scope';
   'karb94/neoscroll.nvim';
   'startup-nvim/startup.nvim';
-  'nvim-lua/plenary.nvim';
   {'nvim-telescope/telescope.nvim', tag = 'v0.2.0' };
   'numToStr/Comment.nvim';
   'jeetsukumaran/vim-buffergator';
@@ -58,7 +57,7 @@ require('pckr').add{
   -- 'liquidz/vim-iced-kaocha';
   -- 'liquidz/vim-iced-fern-debugger';
   'tpope/vim-sexp-mappings-for-regular-people';
-  {'eraserhd/parinfer-rust', run = 'nix-shell --run \"cargo build --release \"'}; -- 'cargo build --release' };
+  {'eraserhd/parinfer-rust', run = 'cargo build --release'}; -- 'cargo build --release' };
   'bronson/vim-trailing-whitespace';
   'cohama/lexima.vim';
   'elmcast/elm-vim';
@@ -362,5 +361,9 @@ vim.o.syntax = 'on'
 vim.o.lazyredraw = true
 
 vim.g.iced_enable_default_key_mappings  = true
-vim.g.loaded_python_provider = 0
+-- vim.g.python_host_prog = '/Users/mattatron/.nix-profile/bin/pynvim-python'
+vim.g.python3_host_prog = '/Users/mattatron/.nix-profile/bin/pynvim-python'
+-- vim.g.loaded_python3_provider = 0
+
+
 vim.g.rooter_patterns = {'.git' }
